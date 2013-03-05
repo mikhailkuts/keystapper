@@ -8,7 +8,7 @@
 package {
 import flash.display.DisplayObjectContainer;
 
-import model.StartCommand;
+import controller.StartCommand;
 
 import org.robotlegs.base.ContextEvent;
 

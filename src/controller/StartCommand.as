@@ -5,7 +5,7 @@
  * Time: 2:03
  * To change this template use File | Settings | File Templates.
  */
-package model {
+package controller {
 import org.robotlegs.mvcs.Command;
 
 import view.game.components.GameView;
