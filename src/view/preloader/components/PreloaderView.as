@@ -9,7 +9,8 @@ package view.preloader.components {
 import flash.display.Sprite;
 
 public class PreloaderView extends Sprite {
-	public function PreloaderView()
+
+	public function init():void
 	{
 	}
 }

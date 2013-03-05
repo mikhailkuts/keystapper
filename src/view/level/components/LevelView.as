@@ -9,7 +9,8 @@ package view.level.components {
 import flash.display.Sprite;
 
 public class LevelView extends Sprite {
-	public function LevelView()
+
+	public function init():void
 	{
 	}
 }

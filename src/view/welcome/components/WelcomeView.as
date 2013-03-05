@@ -9,7 +9,8 @@ package view.welcome.components {
 import flash.display.Sprite;
 
 public class WelcomeView extends Sprite {
-	public function WelcomeView()
+
+	public function init():void
 	{
 	}
 }

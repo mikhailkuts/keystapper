@@ -9,7 +9,8 @@ package view.leaderboard.components {
 import flash.display.Sprite;
 
 public class LeaderboardView extends Sprite {
-	public function LeaderboardView()
+
+	public function init():void
 	{
 	}
 }

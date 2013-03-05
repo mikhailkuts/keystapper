@@ -22,6 +22,8 @@ public class PreloaderMediator extends Mediator {
 	override public function onRegister():void
 	{
 		trace("PreloaderMediator registered");
+
+		view.init();
 	}
 }
 }

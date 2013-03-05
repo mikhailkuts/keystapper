@@ -7,10 +7,28 @@
  */
 package view.game.components {
 import flash.display.Sprite;
+import flash.events.Event;
+
+import view.game.GameMediator;
 
 public class GameView extends Sprite {
-	public function GameView()
+
+	public static const NAME:String = "Game";
+
+	private var _activeView:Sprite;
+
+	public function init():void
 	{
+	}
+
+	public function set activeView(view:Sprite):void
+	{
+		if (_activeView)
+			removeChild(_activeView);
+
+		_activeView = view;
+		addChild(_activeView);
+
 	}
 }
 }
