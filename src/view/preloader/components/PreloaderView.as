@@ -6,8 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package view.preloader.components {
-public class PreloaderView {
-    public function PreloaderView() {
-    }
+import flash.display.Sprite;
+
+public class PreloaderView extends Sprite {
+	public function PreloaderView()
+	{
+	}
 }
 }

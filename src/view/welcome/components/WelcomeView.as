@@ -6,8 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package view.welcome.components {
-public class WelcomeView {
-    public function WelcomeView() {
-    }
+import flash.display.Sprite;
+
+public class WelcomeView extends Sprite {
+	public function WelcomeView()
+	{
+	}
 }
 }

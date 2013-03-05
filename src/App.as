@@ -10,12 +10,16 @@ import flash.display.Sprite;
 import flash.events.Event;
 
 public class App extends Sprite {
-    public function App() {
-        addEventListener(Event.ADDED_TO_STAGE, handlerStageAdded);
-    }
+	public function App()
+	{
+		addEventListener(Event.ADDED_TO_STAGE, handlerStageAdded);
+	}
 
-    private function handlerStageAdded(event:Event):void {
-        trace("Inited");
-    }
+	private function handlerStageAdded(event:Event):void
+	{
+		addEventListener(Event.ADDED_TO_STAGE, handlerStageAdded);
+
+		new GameContext(this);
+	}
 }
 }

@@ -6,8 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package view.game.components {
-public class GameView {
-    public function GameView() {
-    }
+import flash.display.Sprite;
+
+public class GameView extends Sprite {
+	public function GameView()
+	{
+	}
 }
 }

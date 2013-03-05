@@ -6,8 +6,21 @@
  * To change this template use File | Settings | File Templates.
  */
 package view.welcome {
-public class WelcomeMediator {
-    public function WelcomeMediator() {
-    }
+import org.robotlegs.mvcs.Mediator;
+
+import view.welcome.components.WelcomeView;
+
+public class WelcomeMediator extends Mediator {
+
+	[Inject]
+	public var view:WelcomeView;
+
+	public function WelcomeMediator()
+	{
+	}
+	override public function onRegister():void
+	{
+		trace("WelcomeMediator registered");
+	}
 }
 }

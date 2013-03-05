@@ -6,8 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package view.leaderboard.components {
-public class LeaderboardView {
-    public function LeaderboardView() {
-    }
+import flash.display.Sprite;
+
+public class LeaderboardView extends Sprite {
+	public function LeaderboardView()
+	{
+	}
 }
 }

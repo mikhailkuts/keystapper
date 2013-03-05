@@ -6,8 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package view.level.components {
-public class LevelView {
-    public function LevelView() {
-    }
+import flash.display.Sprite;
+
+public class LevelView extends Sprite {
+	public function LevelView()
+	{
+	}
 }
 }

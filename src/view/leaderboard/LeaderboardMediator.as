@@ -6,8 +6,22 @@
  * To change this template use File | Settings | File Templates.
  */
 package view.leaderboard {
-public class LeaderboardMediator {
-    public function LeaderboardMediator() {
-    }
+import org.robotlegs.mvcs.Mediator;
+
+import view.leaderboard.components.LeaderboardView;
+
+public class LeaderboardMediator extends Mediator {
+
+	[Inject]
+	public var view:LeaderboardView;
+
+	public function LeaderboardMediator()
+	{
+	}
+
+	override public function onRegister():void
+	{
+		trace("LeaderboardMediator registered");
+	}
 }
 }

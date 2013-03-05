@@ -6,8 +6,22 @@
  * To change this template use File | Settings | File Templates.
  */
 package view.preloader {
-public class PreloaderMediator {
-    public function PreloaderMediator() {
-    }
+import org.robotlegs.mvcs.Mediator;
+
+import view.preloader.components.PreloaderView;
+
+public class PreloaderMediator extends Mediator {
+
+	[Inject]
+	public var view:PreloaderView;
+
+	public function PreloaderMediator()
+	{
+	}
+
+	override public function onRegister():void
+	{
+		trace("PreloaderMediator registered");
+	}
 }
 }
