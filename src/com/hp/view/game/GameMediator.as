@@ -9,7 +9,6 @@ package com.hp.view.game {
 import com.hp.view.game.components.GameView;
 import com.hp.view.leaderboard.components.LeaderboardView;
 import com.hp.view.level.components.LevelView;
-import com.hp.view.preloader.components.PreloaderView;
 import com.hp.view.welcome.components.WelcomeView;
 
 import flash.events.Event;
@@ -33,9 +32,6 @@ public class GameMediator extends Mediator {
 	public var levelView:LevelView;
 
 	[Inject]
-	public var preloaderView:PreloaderView;
-
-	[Inject]
 	public var welcomeView:WelcomeView;
 
 	override public function onRegister():void
@@ -44,7 +40,6 @@ public class GameMediator extends Mediator {
 
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEADERBOARD, handleActiveLeaderboard, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveLevel, Event);
-		eventMap.mapListener(eventDispatcher, ACTIVE_PRELOADER, handleActivePreloader, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_WELCOME, handleActiveWelcome, Event);
 
 		//eventDispatcher.dispatchEvent(new Event(GameMediator.ACTIVE_WELCOME)); //Temporary place
@@ -60,11 +55,6 @@ public class GameMediator extends Mediator {
 	private function handleActiveLevel(event:Event):void
 	{
 		view.activeView = levelView;
-	}
-
-	private function handleActivePreloader(event:Event):void
-	{
-		view.activeView = preloaderView;
 	}
 
 	private function handleActiveWelcome(event:Event):void

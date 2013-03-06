@@ -13,12 +13,14 @@ import com.hp.view.leaderboard.LeaderboardMediator;
 import com.hp.view.leaderboard.components.LeaderboardView;
 import com.hp.view.level.LevelMediator;
 import com.hp.view.level.components.LevelView;
-import com.hp.view.preloader.PreloaderMediator;
-import com.hp.view.preloader.components.PreloaderView;
 import com.hp.view.welcome.WelcomeMediator;
 import com.hp.view.welcome.components.WelcomeView;
 
 import flash.display.DisplayObjectContainer;
+
+import org.assetloader.AssetLoader;
+
+import org.assetloader.core.IAssetLoader;
 
 import org.robotlegs.base.ContextEvent;
 import org.robotlegs.mvcs.Context;
@@ -34,7 +36,7 @@ public class GameContext extends Context {
 		trace("Context startup");
 
 		mapEvents();
-		mapViews();
+		mapComponents();
 		mapMediators();
 
 		super.startup();
@@ -45,12 +47,13 @@ public class GameContext extends Context {
 		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartCommand, ContextEvent, true);
 	}
 
-	private function mapViews():void
+	private function mapComponents():void
 	{
 		injector.mapSingleton(GameView);
 		injector.mapSingleton(LevelView);
-		injector.mapSingleton(PreloaderView);
 		injector.mapSingleton(WelcomeView);
+
+		injector.mapSingletonOf(IAssetLoader, AssetLoader);
 
 		injector.mapClass(LeaderboardView, LeaderboardView);
 	}
@@ -60,7 +63,6 @@ public class GameContext extends Context {
 		mediatorMap.mapView(GameView, GameMediator);
 		mediatorMap.mapView(LeaderboardView, LeaderboardMediator);
 		mediatorMap.mapView(LevelView, LevelMediator);
-		mediatorMap.mapView(PreloaderView, PreloaderMediator);
 		mediatorMap.mapView(WelcomeView, WelcomeMediator);
 	}
 }
