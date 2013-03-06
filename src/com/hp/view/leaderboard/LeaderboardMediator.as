@@ -5,10 +5,10 @@
  * Time: 1:32
  * To change this template use File | Settings | File Templates.
  */
-package view.leaderboard {
-import org.robotlegs.mvcs.Mediator;
+package com.hp.view.leaderboard {
+import com.hp.view.leaderboard.components.LeaderboardView;
 
-import view.leaderboard.components.LeaderboardView;
+import org.robotlegs.mvcs.Mediator;
 
 public class LeaderboardMediator extends Mediator {
 

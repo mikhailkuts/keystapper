@@ -5,7 +5,7 @@
  * Time: 1:34
  * To change this template use File | Settings | File Templates.
  */
-package view.welcome.components {
+package com.hp.view.welcome.components {
 import flash.display.Sprite;
 
 public class WelcomeView extends Sprite {

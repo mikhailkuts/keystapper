@@ -5,7 +5,7 @@
  * Time: 1:33
  * To change this template use File | Settings | File Templates.
  */
-package view.preloader.components {
+package com.hp.view.preloader.components {
 import flash.display.Sprite;
 
 public class PreloaderView extends Sprite {

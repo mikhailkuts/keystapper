@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 package {
+import com.hp.GameContext;
+
 import flash.display.Sprite;
 import flash.events.Event;
 

@@ -5,10 +5,10 @@
  * Time: 1:33
  * To change this template use File | Settings | File Templates.
  */
-package view.level.components {
+package com.hp.view.leaderboard.components {
 import flash.display.Sprite;
 
-public class LevelView extends Sprite {
+public class LeaderboardView extends Sprite {
 
 	public function init():void
 	{

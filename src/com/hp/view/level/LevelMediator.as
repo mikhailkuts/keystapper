@@ -5,10 +5,10 @@
  * Time: 1:31
  * To change this template use File | Settings | File Templates.
  */
-package view.level {
-import org.robotlegs.mvcs.Mediator;
+package com.hp.view.level {
+import com.hp.view.level.components.LevelView;
 
-import view.level.components.LevelView;
+import org.robotlegs.mvcs.Mediator;
 
 public class LevelMediator extends Mediator {
 

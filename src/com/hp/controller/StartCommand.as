@@ -5,10 +5,10 @@
  * Time: 2:03
  * To change this template use File | Settings | File Templates.
  */
-package controller {
-import org.robotlegs.mvcs.Command;
+package com.hp.controller {
+import com.hp.view.game.components.GameView;
 
-import view.game.components.GameView;
+import org.robotlegs.mvcs.Command;
 
 public class StartCommand extends Command {
 

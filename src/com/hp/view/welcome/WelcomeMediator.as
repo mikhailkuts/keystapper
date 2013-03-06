@@ -5,10 +5,10 @@
  * Time: 1:32
  * To change this template use File | Settings | File Templates.
  */
-package view.welcome {
-import org.robotlegs.mvcs.Mediator;
+package com.hp.view.welcome {
+import com.hp.view.welcome.components.WelcomeView;
 
-import view.welcome.components.WelcomeView;
+import org.robotlegs.mvcs.Mediator;
 
 public class WelcomeMediator extends Mediator {
 
@@ -18,6 +18,7 @@ public class WelcomeMediator extends Mediator {
 	public function WelcomeMediator()
 	{
 	}
+
 	override public function onRegister():void
 	{
 		trace("WelcomeMediator registered");

@@ -5,11 +5,8 @@
  * Time: 1:33
  * To change this template use File | Settings | File Templates.
  */
-package view.game.components {
+package com.hp.view.game.components {
 import flash.display.Sprite;
-import flash.events.Event;
-
-import view.game.GameMediator;
 
 public class GameView extends Sprite {
 

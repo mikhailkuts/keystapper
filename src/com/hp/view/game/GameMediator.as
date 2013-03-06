@@ -5,17 +5,16 @@
  * Time: 1:31
  * To change this template use File | Settings | File Templates.
  */
-package view.game {
-import flash.display.Sprite;
+package com.hp.view.game {
+import com.hp.view.game.components.GameView;
+import com.hp.view.leaderboard.components.LeaderboardView;
+import com.hp.view.level.components.LevelView;
+import com.hp.view.preloader.components.PreloaderView;
+import com.hp.view.welcome.components.WelcomeView;
+
 import flash.events.Event;
 
 import org.robotlegs.mvcs.Mediator;
-
-import view.game.components.GameView;
-import view.leaderboard.components.LeaderboardView;
-import view.level.components.LevelView;
-import view.preloader.components.PreloaderView;
-import view.welcome.components.WelcomeView;
 
 public class GameMediator extends Mediator {
 
@@ -42,7 +41,7 @@ public class GameMediator extends Mediator {
 	override public function onRegister():void
 	{
 		trace("GameMediator registered");
-		
+
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEADERBOARD, handleActiveLeaderboard, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveLevel, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_PRELOADER, handleActivePreloader, Event);

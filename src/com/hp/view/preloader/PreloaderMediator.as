@@ -5,10 +5,10 @@
  * Time: 1:32
  * To change this template use File | Settings | File Templates.
  */
-package view.preloader {
-import org.robotlegs.mvcs.Mediator;
+package com.hp.view.preloader {
+import com.hp.view.preloader.components.PreloaderView;
 
-import view.preloader.components.PreloaderView;
+import org.robotlegs.mvcs.Mediator;
 
 public class PreloaderMediator extends Mediator {
 

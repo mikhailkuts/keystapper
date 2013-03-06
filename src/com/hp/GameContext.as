@@ -5,25 +5,23 @@
  * Time: 1:27
  * To change this template use File | Settings | File Templates.
  */
-package {
+package com.hp {
+import com.hp.controller.StartCommand;
+import com.hp.view.game.GameMediator;
+import com.hp.view.game.components.GameView;
+import com.hp.view.leaderboard.LeaderboardMediator;
+import com.hp.view.leaderboard.components.LeaderboardView;
+import com.hp.view.level.LevelMediator;
+import com.hp.view.level.components.LevelView;
+import com.hp.view.preloader.PreloaderMediator;
+import com.hp.view.preloader.components.PreloaderView;
+import com.hp.view.welcome.WelcomeMediator;
+import com.hp.view.welcome.components.WelcomeView;
+
 import flash.display.DisplayObjectContainer;
 
-import controller.StartCommand;
-
 import org.robotlegs.base.ContextEvent;
-
 import org.robotlegs.mvcs.Context;
-
-import view.game.GameMediator;
-import view.game.components.GameView;
-import view.leaderboard.LeaderboardMediator;
-import view.leaderboard.components.LeaderboardView;
-import view.level.LevelMediator;
-import view.level.components.LevelView;
-import view.preloader.PreloaderMediator;
-import view.preloader.components.PreloaderView;
-import view.welcome.WelcomeMediator;
-import view.welcome.components.WelcomeView;
 
 public class GameContext extends Context {
 	public function GameContext(contextView:DisplayObjectContainer)
@@ -33,7 +31,7 @@ public class GameContext extends Context {
 
 	override public function startup():void
 	{
-		trace("Context inited");
+		trace("Context startup");
 
 		mapEvents();
 		mapViews();
