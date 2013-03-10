@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp {
-import com.hp.controller.StartCommand;
+import com.hp.controller.StartupCompleteCommand;
 import com.hp.view.game.GameMediator;
 import com.hp.view.game.components.GameView;
 import com.hp.view.leaderboard.LeaderboardMediator;
@@ -42,7 +42,8 @@ public class GameContext extends Context {
 
 	private function mapEvents():void
 	{
-		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartCommand, ContextEvent, true);
+		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCompleteCommand, ContextEvent, true);
+		//commandMap.mapEvent(AssetLoaderEvent.CONFIG_LOADED, ConfigLoadedCommand, AssetLoaderEvent, true);
 	}
 
 	private function mapComponents():void
