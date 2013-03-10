@@ -3,12 +3,11 @@
  * created at: 10.03.13
  */
 package com.hp.view.level.model {
-	import com.hp.view.level.Delay;
-
-	import org.robotlegs.mvcs.Actor;
-
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
+	import org.robotlegs.mvcs.Actor;
+
+
 
 	public class DelaysModel extends Actor {
 		

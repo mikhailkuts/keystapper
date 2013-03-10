@@ -2,12 +2,8 @@
  * @author: Alexander Slavschik <kvinty@icloud.com>
  * created at: 10.03.13
  */
-package com.hp.view.level {
+package com.hp.view.level.model {
 import flash.events.KeyboardEvent;
-
-import mx.effects.effectClasses.AddRemoveEffectTargetFilter;
-
-import spark.components.RichEditableText;
 
 public class Delay {
 
