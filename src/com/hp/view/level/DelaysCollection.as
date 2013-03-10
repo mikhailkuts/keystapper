@@ -3,15 +3,31 @@
  * created at: 10.03.13
  */
 package com.hp.view.level {
+import flash.events.KeyboardEvent;
+import flash.utils.Timer;
+
 public class DelaysCollection {
 
+	private var _timer:Timer;
+	private var _startTime:int;
 	private var _rawData:XML;
 	private var _delays:Vector.<Delay>;
 
 	public function DelaysCollection()
 	{
 	}
+	public function start():void
+	{
 
+	}
+	public function stop():void
+	{
+
+	}
+	public function press(keyCode:int, time:int):void
+	{
+
+	}
 	public function getDelaysForTime(time:int, state:int = 1):Vector.<Delay>
 	{
 		var d:Vector.<Delay> = new Vector.<Delay>();

@@ -19,9 +19,6 @@ public class LevelMediator extends Mediator {
 
 	[Inject]
 	public var view:LevelView;
-	private var _timer:Timer;
-	private var _startTime:int;
-	private const HOVER_DELAY:int = 200;
 	private var delays:DelaysCollection;
 
 	public function LevelMediator()
@@ -53,9 +50,6 @@ public class LevelMediator extends Mediator {
 
 	private function timerHandler(event:TimerEvent):void
 	{
-		var currentTime:int = getTimer();
-		var offset:int = currentTime - _startTime;
-		log(delays.getDelaysForTime(offset), Delay.STATE_ACTIVE);
 		//log("time", offset / 1000, "seconds");
 	}
 
@@ -71,6 +65,12 @@ public class LevelMediator extends Mediator {
 	private function keyDownHandler(event:KeyboardEvent):void
 	{
 		log(event.keyCode);
+
+		var currentTime:int = getTimer();
+		var offset:int = currentTime - _startTime;
+
+		delays.press(event.keyCode, offset);
+
 		switch (event.keyCode)
 		{
 			case 83:

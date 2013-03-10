@@ -3,6 +3,10 @@
  * created at: 10.03.13
  */
 package com.hp.view.level {
+import flash.events.KeyboardEvent;
+
+import mx.effects.effectClasses.AddRemoveEffectTargetFilter;
+
 import spark.components.RichEditableText;
 
 public class Delay {
@@ -10,7 +14,8 @@ public class Delay {
 	public static const STATE_PAST:int = 0;
 	public static const STATE_UPCOMING:int = 1;
 	public static const STATE_ACTIVE:int = 2;
-	public static const STATE_FUTURED:int = 3;
+	public static const STATE_PASSED:int = 3;
+	public static const STATE_ARCHIVED:int = 4;
 
 	public static var UPCOMING_RANGE:uint = 250;
 	public static var ACTIVE_RANGE:uint = 150;
@@ -18,6 +23,7 @@ public class Delay {
 	private var _time:int;
 	private var _key:String;
 	private var _keyCode:int;
+	private var _passed:Boolean = false;
 
 
 	public function Delay(obj:Object)
@@ -25,6 +31,11 @@ public class Delay {
 		_time = int(obj.@t);
 		_key = String(obj.@k);
 		_keyCode = _key.charCodeAt(0);
+	}
+
+	public function press(event:KeyboardEvent):void
+	{
+		_passed = _keyCode == event.keyCode;
 	}
 
 	public function get keyCode():int
@@ -48,11 +59,12 @@ public class Delay {
 
 	public function getStateForTime(value:int):int
 	{
+		if(_passed) return STATE_PASSED;
 		var diff:int = _time - value;
 		if(diff < 0) return STATE_PAST;
 		if(diff < ACTIVE_RANGE) return STATE_ACTIVE;
 		if(diff < UPCOMING_RANGE) return STATE_UPCOMING;
-		return STATE_FUTURED;
+		return STATE_ARCHIVED;
 	}
 }
 }
