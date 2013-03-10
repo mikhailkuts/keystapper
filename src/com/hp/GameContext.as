@@ -33,8 +33,6 @@ public class GameContext extends Context {
 
 	override public function startup():void
 	{
-		trace("Context startup");
-
 		mapEvents();
 		mapComponents();
 		mapMediators();
