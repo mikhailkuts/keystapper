@@ -2,38 +2,21 @@
  * @author: Alexander Slavschik <kvinty@icloud.com>
  * created at: 10.03.13
  */
-package com.hp.view.level {
-	import flash.utils.getTimer;
+package com.hp.view.level.model {
+	import com.hp.view.level.Delay;
+
+	import org.robotlegs.mvcs.Actor;
+
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 
-	public class DelaysManager {
+	public class DelaysModel extends Actor {
 		
-		private var _timer : Timer;
-		private var _startTime : int;
 		private var _rawData : XML;
 		private var _delays : Vector.<Delay>;
 
-		public function DelaysManager() {
-			_timer = new Timer(100);
-			_timer.addEventListener(TimerEvent.TIMER, timerHandler);
-		}
-
-		private function timerHandler(event : TimerEvent) : void {
-		}
-
-		public function start() : void {
-			log("DelaysManager.start");
-			_startTime = getTimer();
-			_timer.start();
-		}
-
-		public function stop() : void {
-			log("DelaysManager.stop");
-			_timer.stop();
-		}
-
-		public function press(keyCode : int) : void {
+		public function DelaysModel() {
+			log("DelaysModel");
 		}
 
 		public function getDelaysForTime(time : int, state : int = 1) : Vector.<Delay> {
@@ -67,16 +50,6 @@ package com.hp.view.level {
 			if (a.time > b.time) return 1;
 			if (a.time < b.time) return -1;
 			return 0;
-		}
-
-		public function get running() : Boolean {
-			return _timer.running;
-		}
-
-		public function destroy() : void 
-		{
-			_timer.removeEventListener(TimerEvent.TIMER, timerHandler);
-			_timer = null;
 		}
 	}
 }

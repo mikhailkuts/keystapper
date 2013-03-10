@@ -6,23 +6,37 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.view.level {
-	import org.osmf.logging.Log;
+	import flash.utils.getTimer;
+	import com.hp.view.level.events.TimeKeyboardEvent;
 	import com.hp.view.level.components.LevelView;
+	import com.hp.view.level.model.DelaysModel;
 
 	import org.robotlegs.mvcs.Mediator;
 
 	import flash.events.KeyboardEvent;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+
+
 
 	public class LevelMediator extends Mediator {
 		[Inject]
 		public var view : LevelView;
-		private var _delaysManager : DelaysManager;
-
+		[Inject]
+		public var _delaysManager : DelaysModel;
+		
+		private var _timer : Timer;
+		private var _startTime : int;
+		
 		public function LevelMediator() {
-			_delaysManager = new DelaysManager();
+			_timer = new Timer(100);
+			_timer.addEventListener(TimerEvent.TIMER, timerHandler);
 		}
 
 		override public function onRegister() : void {
+			
+			super.onRegister();
+			
 			view.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			view.init();
 
@@ -37,26 +51,27 @@ package com.hp.view.level {
 				<d t="6783" k="L" />
 			</data>;
 			_delaysManager.parse(data);
+			start();
 		}
-
+		private function timerHandler(event : TimerEvent) : void 
+		{
+			
+		}
 		private function keyDownHandler(event : KeyboardEvent) : void {
-			log(event.keyCode);
-
-			_delaysManager.press(event.keyCode);
-
-			switch (event.keyCode) {
-				case 83:
-					if (_delaysManager.running) {
-						_delaysManager.stop();
-					} else {
-						_delaysManager.start();
-					}
-					break;
-			}
+			dispatch(new TimeKeyboardEvent(event, getTimer() - _startTime));
 		}
 
 		override public function onRemove() : void {
-			_delaysManager.destroy();
+			stop();
+			view.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			super.onRemove();
+		}
+		private function start() : void {
+			_timer.start();
+		}
+
+		private function stop() : void {
+			_timer.stop();
 		}
 	}
 }

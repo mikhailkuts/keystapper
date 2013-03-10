@@ -6,6 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp {
+	import com.hp.view.level.events.TimeKeyboardEvent;
+	import com.hp.view.level.model.DelaysModel;
+	import com.hp.view.level.commands.KeyboardCommand;
+	import flash.events.KeyboardEvent;
 	import com.hp.controller.StartupCompleteCommand;
 	import com.hp.view.game.GameMediator;
 	import com.hp.view.game.components.GameView;
@@ -41,6 +45,7 @@ public class GameContext extends Context {
 	private function mapEvents():void
 	{
 		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCompleteCommand, ContextEvent, true);
+		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, TimeKeyboardEvent);
 		//commandMap.mapEvent(AssetLoaderEvent.CONFIG_LOADED, ConfigLoadedCommand, AssetLoaderEvent, true);
 	}
 
@@ -49,9 +54,9 @@ public class GameContext extends Context {
 		injector.mapSingleton(GameView);
 		injector.mapSingleton(LevelView);
 		injector.mapSingleton(WelcomeView);
+		injector.mapSingleton(DelaysModel);
 
 		injector.mapSingletonOf(IAssetLoader, AssetLoader);
-
 		injector.mapClass(LeaderboardView, LeaderboardView);
 	}
 
