@@ -5,7 +5,8 @@
  * Time: 1:00
  * To change this template use File | Settings | File Templates.
  */
-package {
+package
+{
 import com.hp.GameContext;
 
 import flash.display.MovieClip;

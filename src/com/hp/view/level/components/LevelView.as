@@ -12,6 +12,7 @@ public class LevelView extends Sprite {
 
 	public function init():void
 	{
+		log("level view created");
 	}
 }
 }

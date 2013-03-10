@@ -42,7 +42,7 @@ public class GameMediator extends Mediator {
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveLevel, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_WELCOME, handleActiveWelcome, Event);
 
-		//eventDispatcher.dispatchEvent(new Event(GameMediator.ACTIVE_WELCOME)); //Temporary place
+		eventDispatcher.dispatchEvent(new Event(GameMediator.ACTIVE_LEVEL)); //Temporary place
 
 		view.init();
 	}
