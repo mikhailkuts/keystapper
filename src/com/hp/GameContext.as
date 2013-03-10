@@ -6,24 +6,22 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp {
-import com.hp.controller.StartupCompleteCommand;
-import com.hp.view.game.GameMediator;
-import com.hp.view.game.components.GameView;
-import com.hp.view.leaderboard.LeaderboardMediator;
-import com.hp.view.leaderboard.components.LeaderboardView;
-import com.hp.view.level.LevelMediator;
-import com.hp.view.level.components.LevelView;
-import com.hp.view.welcome.WelcomeMediator;
-import com.hp.view.welcome.components.WelcomeView;
+	import com.hp.controller.StartupCompleteCommand;
+	import com.hp.view.game.GameMediator;
+	import com.hp.view.game.components.GameView;
+	import com.hp.view.leaderboard.LeaderboardMediator;
+	import com.hp.view.leaderboard.components.LeaderboardView;
+	import com.hp.view.level.LevelMediator;
+	import com.hp.view.level.components.LevelView;
+	import com.hp.view.welcome.WelcomeMediator;
+	import com.hp.view.welcome.components.WelcomeView;
 
-import flash.display.DisplayObjectContainer;
+	import org.assetloader.AssetLoader;
+	import org.assetloader.core.IAssetLoader;
+	import org.robotlegs.base.ContextEvent;
+	import org.robotlegs.mvcs.Context;
 
-import org.assetloader.AssetLoader;
-
-import org.assetloader.core.IAssetLoader;
-
-import org.robotlegs.base.ContextEvent;
-import org.robotlegs.mvcs.Context;
+	import flash.display.DisplayObjectContainer;
 
 public class GameContext extends Context {
 	public function GameContext(contextView:DisplayObjectContainer)

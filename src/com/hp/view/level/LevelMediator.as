@@ -6,86 +6,57 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.view.level {
-import com.hp.view.level.components.LevelView;
+	import org.osmf.logging.Log;
+	import com.hp.view.level.components.LevelView;
 
-import flash.events.KeyboardEvent;
-import flash.events.TimerEvent;
-import flash.utils.Timer;
-import flash.utils.getTimer;
+	import org.robotlegs.mvcs.Mediator;
 
-import org.robotlegs.mvcs.Mediator;
+	import flash.events.KeyboardEvent;
 
-public class LevelMediator extends Mediator {
+	public class LevelMediator extends Mediator {
+		[Inject]
+		public var view : LevelView;
+		private var _delaysManager : DelaysManager;
 
-	[Inject]
-	public var view:LevelView;
-	private var delays:DelaysCollection;
+		public function LevelMediator() {
+			_delaysManager = new DelaysManager();
+		}
 
-	public function LevelMediator()
-	{
-		delays = new DelaysCollection();
-	}
+		override public function onRegister() : void {
+			view.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			view.init();
 
-	override public function onRegister():void
-	{
-		log("LevelMediator registered");
+			var data : XML = <data>
+				<d t="2300" k="A" />
+				<d t="2350" k="B" />
+				<d t="3200" k="C" />
+				<d t="4380" k="D" />
+				<d t="1303" k="E" />
+				<d t="9872" k="F" />
+				<d t="8726" k="G" />
+				<d t="6783" k="L" />
+			</data>;
+			_delaysManager.parse(data);
+		}
 
-		view.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
-		view.init();
+		private function keyDownHandler(event : KeyboardEvent) : void {
+			log(event.keyCode);
 
-		_timer = new Timer(100);
-		_timer.addEventListener(TimerEvent.TIMER, timerHandler);
-		var data:XML = <data>
-			<d t="2300" k="A" />
-			<d t="2350" k="B" />
-			<d t="3200" k="C" />
-			<d t="4380" k="D" />
-			<d t="1303" k="E" />
-			<d t="9872" k="F" />
-			<d t="8726" k="G" />
-			<d t="6783" k="L" />
-		</data>;
-		delays.parse(data);
-	}
+			_delaysManager.press(event.keyCode);
 
-	private function timerHandler(event:TimerEvent):void
-	{
-		//log("time", offset / 1000, "seconds");
-	}
+			switch (event.keyCode) {
+				case 83:
+					if (_delaysManager.running) {
+						_delaysManager.stop();
+					} else {
+						_delaysManager.start();
+					}
+					break;
+			}
+		}
 
-	private function start():void
-	{
-		_timer.start();
-		_startTime = getTimer();
-	}
-	private function stop():void
-	{
-		_timer.stop();
-	}
-	private function keyDownHandler(event:KeyboardEvent):void
-	{
-		log(event.keyCode);
-
-		var currentTime:int = getTimer();
-		var offset:int = currentTime - _startTime;
-
-		delays.press(event.keyCode, offset);
-
-		switch (event.keyCode)
-		{
-			case 83:
-				if(_timer.running){
-					stop();
-				}else{
-					start();
-				}
-			break;
+		override public function onRemove() : void {
+			_delaysManager.destroy();
 		}
 	}
-	override public function onRemove():void
-	{
-		_timer.removeEventListener(TimerEvent.TIMER, timerHandler);
-		_timer = null;
-	}
-}
 }
