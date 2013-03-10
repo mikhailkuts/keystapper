@@ -13,9 +13,8 @@ import org.assetloader.core.IAssetLoader;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 
-	public class StartupCompleteCommand extends Command 
+	public class StartupCompleteCommand extends Command
 	{
-		
 		[Inject]
 		public var assetLoader : IAssetLoader;
 
