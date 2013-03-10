@@ -10,27 +10,11 @@ import com.hp.GameContext;
 
 import flash.display.MovieClip;
 
-import flash.events.Event;
-
+[Frame(factoryClass="PreloaderScreen")]
 public class App extends MovieClip {
 
-	private var _preloaderScreen:PreloaderScreen;
-	
 	public function App():void
 	{
-		_preloaderScreen = new PreloaderScreen();
-		_preloaderScreen.addEventListener(Event.COMPLETE, handlePreloadeingComplete);
-		_preloaderScreen.init();
-
-		addChild(_preloaderScreen);
-	}
-
-	private function handlePreloadeingComplete(event:Event):void
-	{
-		_preloaderScreen.removeEventListener(Event.COMPLETE, handlePreloadeingComplete);
-
-		removeChild(_preloaderScreen);
-
 		new GameContext(this);
 	}
 }

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="AssetsLoader" type="flex">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/AssetLoader-v2.5.1.swc!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
