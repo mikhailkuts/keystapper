@@ -21,7 +21,7 @@ public class WelcomeMediator extends Mediator {
 
 	override public function onRegister():void
 	{
-		trace("WelcomeMediator registered");
+		log("WelcomeMediator registered");
 
 		view.init();
 	}

@@ -36,7 +36,7 @@ public class GameMediator extends Mediator {
 
 	override public function onRegister():void
 	{
-		trace("GameMediator registered");
+		log("GameMediator registered");
 
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEADERBOARD, handleActiveLeaderboard, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveLevel, Event);

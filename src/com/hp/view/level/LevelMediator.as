@@ -21,9 +21,10 @@ public class LevelMediator extends Mediator {
 
 	override public function onRegister():void
 	{
-		trace("LevelMediator registered");
+		log("LevelMediator registered");
 
 		view.init();
 	}
+
 }
 }

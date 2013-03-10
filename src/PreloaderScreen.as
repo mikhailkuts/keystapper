@@ -2,20 +2,17 @@ package {
 import flash.display.DisplayObject;
 import flash.display.LoaderInfo;
 import flash.display.MovieClip;
-import flash.display.Sprite;
 import flash.events.Event;
 import flash.utils.getDefinitionByName;
 
 public class PreloaderScreen extends MovieClip
 {
 	private var _targetLoaderInfo:LoaderInfo;
-
-	private var _loadPercent:Number = 0;
 	private const MAIN_CLASS_NAME:String = "App";
-	private var _root:Object;
 
 	public function PreloaderScreen()
 	{
+		log("Preloader");
 		stop();
 		if(stage){
 			handleAddToStage();
@@ -34,18 +31,17 @@ public class PreloaderScreen extends MovieClip
 
 	private function handleEnterFrame(evt:Event):void
 	{
-		_loadPercent = _targetLoaderInfo.bytesLoaded / _targetLoaderInfo.bytesTotal;
+		var _loadPercent:Number = _targetLoaderInfo.bytesLoaded / _targetLoaderInfo.bytesTotal;
 
 
-		if (_loadPercent == 1)
-		{
+		if (_loadPercent >= 1) {
 			this.removeEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			this.dispatchEvent(new Event(Event.COMPLETE));
 
 			nextFrame();
-			var mainClass : Class = getDefinitionByName(MAIN_CLASS_NAME) as Class;
-			_root = new mainClass as Object;
-			addChild(_root as DisplayObject);
+			var mainClass:Class = getDefinitionByName(MAIN_CLASS_NAME) as Class;
+			var root:Object = new mainClass as Object;
+			addChild(root as DisplayObject);
 		}
 	}
 }

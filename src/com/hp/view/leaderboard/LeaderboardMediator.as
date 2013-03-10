@@ -21,7 +21,7 @@ public class LeaderboardMediator extends Mediator {
 
 	override public function onRegister():void
 	{
-		trace("LeaderboardMediator registered");
+		log("LeaderboardMediator registered");
 
 		view.init();
 	}
