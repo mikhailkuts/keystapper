@@ -36,8 +36,8 @@ import flash.utils.getTimer;
 
 		private function handleDataAssigned(event:Event):void {
 			log("LevelsMediator.handleDataAssigned");
-			for (var levelId:String in levelsModel.levels)
-				log(levelsModel.levels[levelId]);
+			//for (var levelId:String in levelsModel.levels)
+				//log(levelsModel.levels[levelId]);
 		}
 
 		override public function onRegister() : void {

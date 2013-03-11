@@ -6,7 +6,7 @@ package {
 	 * created at: 10.03.13
 	 */
 	public function log(...params) : void {
-        trace(new Error().getStackTrace(), params);
+        trace(params);
         try
         {
             ExternalInterface.call("console.log", params.join(" "));

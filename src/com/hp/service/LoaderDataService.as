@@ -46,7 +46,7 @@ public class LoaderDataService extends Actor {
 
 		var levelsAssetsData:Dictionary = data[LevelsModel.LEVELS_ASSETS];
 		var levels:Vector.<LevelVO> = new <LevelVO>[];
-		for (var levelId in levelsAssetsData) {
+		for (var levelId:* in levelsAssetsData) {
 			var levelVO:LevelVO = new LevelVO();
 
 			for (var assetId:* in levelsAssetsData[levelId]) {
