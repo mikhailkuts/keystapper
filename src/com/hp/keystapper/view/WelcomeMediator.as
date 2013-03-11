@@ -9,6 +9,9 @@ package com.hp.keystapper.view {
 import assets.WelcomeView;
 
 import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.view.GameMediator;
+
+import flash.events.Event;
 
 import flash.events.MouseEvent;
 
@@ -32,18 +35,18 @@ public class WelcomeMediator extends Mediator {
 	private function clickHandler(event:MouseEvent):void {
 		switch (event.currentTarget) {
 			case view.btn1 :
-				log(levelsModel.levels[0]);
+				levelsModel.currentLevelID = 0;
 				break;
 			case view.btn2 :
-				log(levelsModel.levels[1]);
+				levelsModel.currentLevelID = 1;
 				break;
 			case view.btn3 :
-				log(levelsModel.levels[2]);
+				levelsModel.currentLevelID = 2;
 				break;
 			default :
 				break;
 		}
-
+		dispatch(new Event(GameMediator.ACTIVE_LEVEL));
 	}
 
 

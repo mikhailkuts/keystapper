@@ -42,13 +42,13 @@ public class LoaderDataService extends Actor {
 		assetLoader.start();
 	}
 
+	// TODO: Миша, сделай так чтобы levels всегда были отсортированы правильно. Т.е. уровень - это порядковый номер в векторе. В дикшнари - жирно.
 	private function onLoadingComplete(signal:LoaderSignal, data:Dictionary):void {
 
 		var levelsAssetsData:Dictionary = data[LevelsModel.LEVELS_ASSETS];
 		var levels:Vector.<LevelVO> = new <LevelVO>[];
 		for (var levelId:* in levelsAssetsData) {
 			var levelVO:LevelVO = new LevelVO();
-
 			for (var assetId:* in levelsAssetsData[levelId]) {
 				var assetItem:Object = levelsAssetsData[levelId][assetId];
 

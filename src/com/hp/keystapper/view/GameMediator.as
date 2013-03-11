@@ -47,30 +47,37 @@ public class GameMediator extends Mediator {
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveLevel, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_WELCOME, handleActiveWelcome, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_PRELOADER, handleActivePreloader, Event);
-
+		//eventMap.mapListener(eventDispatcher, LevelsModel.LEVEL_CHANGED, onLevelChanged, Event);
 
 		//eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
 	}
 
-	private function handleActivePreloader(event:Event):void {
+	private function handleActivePreloader(event:Event):void
+	{
 		log("handleActivePreloader");
 		this.activeView = preloaderView;
 	}
 
-	private function handleActiveLeaderboard(event:Event):void {
+	private function handleActiveLeaderboard(event:Event):void
+	{
 		this.activeView = leaderboardView;
 	}
 
-	private function handleActiveLevel(event:Event):void {
+	private function handleActiveLevel(event:Event):void
+	{
 		this.activeView = levelView;
 	}
 
-	private function handleActiveWelcome(event:Event):void {
+	private function handleActiveWelcome(event:Event):void
+	{
 		log("handleActiveWelcome");
 		this.activeView = welcomeView;
 	}
-	public function set activeView(aview:Sprite):void {
-		if (_activeView)
+	public function set activeView(aview:Sprite):void
+	{
+		if(_activeView == aview)
+			return;
+		if(_activeView != null)
 			view.removeChild(_activeView);
 
 		_activeView = aview;

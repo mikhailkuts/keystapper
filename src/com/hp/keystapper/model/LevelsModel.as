@@ -16,10 +16,13 @@ import org.robotlegs.mvcs.Actor;
 public class LevelsModel extends Actor {
 
 	public static const LEVELS_ASSETS:String = "LevelsAssets";
-
 	public static const DATA_ASSIGNED:String = "DataAssigned";
+
+	public static const LEVEL_CHANGED:String = "onLevelChanged";
+
 	private var _levels:Vector.<LevelVO>;
 	private var _ready:Boolean;
+	private var _currentLevelID:int = 0;
 
 	public function LevelsModel() {
 		super();
@@ -51,6 +54,20 @@ public class LevelsModel extends Actor {
 
 	public function get ready():Boolean {
 		return _ready;
+	}
+	public function get currentLevel():LevelVO
+	{
+		return levels[_currentLevelID];
+	}
+	public function get currentLevelID():int
+	{
+		return _currentLevelID;
+	}
+
+	public function set currentLevelID(value:int):void
+	{
+		_currentLevelID = value;
+		dispatch(new Event(LEVEL_CHANGED));
 	}
 }
 
