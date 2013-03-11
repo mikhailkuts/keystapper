@@ -6,7 +6,11 @@ package {
 	 * created at: 10.03.13
 	 */
 	public function log(...params) : void {
-		trace(params);
-		// ExternalInterface.call("console.log", params.join(" "));
+        try
+        {
+            ExternalInterface.call("console.log", params.join(" "));
+        }catch (e:SecurityError){
+            trace(params);
+        }
 	}
 }

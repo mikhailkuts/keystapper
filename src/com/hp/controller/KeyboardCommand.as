@@ -1,5 +1,5 @@
 package com.hp.controller {
-	import com.hp.controller.events.TimeKeyboardEvent;
+	import com.hp.events.TimeKeyboardEvent;
 	import com.hp.model.DelaysModel;
 
 	import org.robotlegs.mvcs.Command;

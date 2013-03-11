@@ -9,7 +9,7 @@ package com.hp {
 	import com.hp.controller.StartupCommand;
 	import com.hp.model.LevelsModel;
 	import com.hp.service.LoaderDataService;
-	import com.hp.controller.events.TimeKeyboardEvent;
+	import com.hp.events.TimeKeyboardEvent;
 	import com.hp.model.DelaysModel;
 	import com.hp.controller.KeyboardCommand;
 

@@ -8,7 +8,7 @@
 package com.hp.view.level {
 	import flash.utils.getTimer;
 
-	import com.hp.controller.events.TimeKeyboardEvent;
+	import com.hp.events.TimeKeyboardEvent;
 	import com.hp.view.level.components.LevelView;
 	import com.hp.model.DelaysModel;
 
@@ -65,6 +65,7 @@ package com.hp.view.level {
 		}
 
 		private function start() : void {
+            _startTime = getTimer();
 			_timer.start();
 		}
 
