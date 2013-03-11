@@ -13,7 +13,6 @@ import com.hp.view.level.events.TimeKeyboardEvent;
 import com.hp.view.level.model.DelaysModel;
 import com.hp.view.level.commands.KeyboardCommand;
 import flash.events.KeyboardEvent;
-import com.hp.controller.StartupCompleteCommand;
 import com.hp.view.game.GameMediator;
 import com.hp.view.game.components.GameView;
 import com.hp.view.leaderboard.LeaderboardMediator;
@@ -49,7 +48,6 @@ public class GameContext extends Context {
 	private function mapEvents():void
 	{
 		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
-		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCompleteCommand, ContextEvent, true);
 		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, TimeKeyboardEvent);
 	}
 
