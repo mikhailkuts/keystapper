@@ -7,10 +7,10 @@
  */
 package com.hp {
 	import com.hp.controller.StartupCommand;
-	import com.hp.model.LevelsModel;
+import com.hp.events.TimeKeyboardEvent;
+import com.hp.model.LevelsModel;
 	import com.hp.service.LoaderDataService;
-	import com.hp.events.TimeKeyboardEvent;
-	import com.hp.model.DelaysModel;
+	import com.hp.model.NotesModel;
 	import com.hp.controller.KeyboardCommand;
 
 	import flash.events.KeyboardEvent;
@@ -54,7 +54,7 @@ package com.hp {
 			injector.mapSingleton(GameView);
 			injector.mapSingleton(LevelView);
 			injector.mapSingleton(WelcomeView);
-			injector.mapSingleton(DelaysModel);
+			injector.mapSingleton(NotesModel);
 
 			// Components
 			injector.mapClass(LeaderboardView, LeaderboardView);

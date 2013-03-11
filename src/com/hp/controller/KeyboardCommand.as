@@ -1,6 +1,6 @@
 package com.hp.controller {
-	import com.hp.events.TimeKeyboardEvent;
-	import com.hp.model.DelaysModel;
+import com.hp.events.TimeKeyboardEvent;
+import com.hp.model.NotesModel;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -12,7 +12,7 @@ package com.hp.controller {
 		[Inject]
 		public var event : TimeKeyboardEvent;
 		[Inject]
-		public var delays : DelaysModel;
+		public var delays : NotesModel;
 
 		public function KeyboardCommand() {
 		}

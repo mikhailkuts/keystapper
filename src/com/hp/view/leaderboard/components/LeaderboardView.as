@@ -6,10 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.view.leaderboard.components {
-	import flash.display.Sprite;
+import flash.display.Sprite;
 
-	public class LeaderboardView extends Sprite {
-		public function init() : void {
-		}
+public class LeaderboardView extends Sprite {
+	public function init():void {
 	}
+}
 }

@@ -6,11 +6,12 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.view.level {
-	import flash.utils.getTimer;
+import com.hp.events.TimeKeyboardEvent;
 
-	import com.hp.events.TimeKeyboardEvent;
+import flash.utils.getTimer;
+
 	import com.hp.view.level.components.LevelView;
-	import com.hp.model.DelaysModel;
+	import com.hp.model.NotesModel;
 
 	import org.robotlegs.mvcs.Mediator;
 
@@ -22,7 +23,7 @@ package com.hp.view.level {
 		[Inject]
 		public var view : LevelView;
 		[Inject]
-		public var _delaysManager : DelaysModel;
+		public var _delaysManager : NotesModel;
 		private var _timer : Timer;
 		private var _startTime : int;
 
