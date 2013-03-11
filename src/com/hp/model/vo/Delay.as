@@ -2,7 +2,7 @@
  * @author: Alexander Slavschik <kvinty@icloud.com>
  * created at: 10.03.13
  */
-package com.hp.view.level.model {
+package com.hp.model.vo {
 import flash.events.KeyboardEvent;
 
 public class Delay {

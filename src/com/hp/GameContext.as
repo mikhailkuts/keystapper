@@ -9,9 +9,9 @@ package com.hp {
 import com.hp.controller.StartupCommand;
 import com.hp.model.LevelsModel;
 import com.hp.service.LoaderDataService;
-import com.hp.view.level.events.TimeKeyboardEvent;
-import com.hp.view.level.model.DelaysModel;
-import com.hp.view.level.commands.KeyboardCommand;
+import com.hp.controller.events.TimeKeyboardEvent;
+import com.hp.model.DelaysModel;
+import com.hp.controller.KeyboardCommand;
 import flash.events.KeyboardEvent;
 import com.hp.view.game.GameMediator;
 import com.hp.view.game.components.GameView;

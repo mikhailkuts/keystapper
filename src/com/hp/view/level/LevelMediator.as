@@ -7,9 +7,9 @@
  */
 package com.hp.view.level {
 	import flash.utils.getTimer;
-	import com.hp.view.level.events.TimeKeyboardEvent;
+	import com.hp.controller.events.TimeKeyboardEvent;
 	import com.hp.view.level.components.LevelView;
-	import com.hp.view.level.model.DelaysModel;
+	import com.hp.model.DelaysModel;
 
 	import org.robotlegs.mvcs.Mediator;
 

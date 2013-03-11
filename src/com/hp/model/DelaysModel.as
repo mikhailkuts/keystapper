@@ -2,9 +2,8 @@
  * @author: Alexander Slavschik <kvinty@icloud.com>
  * created at: 10.03.13
  */
-package com.hp.view.level.model {
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
+package com.hp.model {
+import com.hp.model.vo.Delay;
 	import org.robotlegs.mvcs.Actor;
 
 

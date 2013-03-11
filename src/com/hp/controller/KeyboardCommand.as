@@ -1,6 +1,6 @@
-package com.hp.view.level.commands {
-	import com.hp.view.level.events.TimeKeyboardEvent;
-	import com.hp.view.level.model.DelaysModel;
+package com.hp.controller {
+	import com.hp.controller.events.TimeKeyboardEvent;
+	import com.hp.model.DelaysModel;
 
 	import org.robotlegs.mvcs.Command;
 

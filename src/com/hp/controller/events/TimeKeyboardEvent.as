@@ -1,4 +1,4 @@
-package com.hp.view.level.events {
+package com.hp.controller.events {
 	import flash.events.KeyboardEvent;
 
 	/**
