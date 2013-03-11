@@ -5,8 +5,7 @@ import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 
-//import flash.events.*;
-
+// import flash.events.*;
 /**
  * @author andrew
  */
@@ -18,22 +17,19 @@ public class VKButton extends SimpleButton {
 	private var _overText:TextField;
 	private var _overTextFormat:TextFormat;
 
-	public function VKButton(label:String, type:Number = 1)
-	{
+	public function VKButton(label:String, type:Number = 1) {
 		this._buttonType = type;
 		this._label = label;
 		this.init();
 		this.updateButton();
 	}
 
-	public function set label(value:String):void
-	{
+	public function set label(value:String):void {
 		_label = value;
 		updateButton();
 	}
 
-	private function init():void
-	{
+	private function init():void {
 		_upTextFormat = new TextFormat();
 		_overTextFormat = new TextFormat();
 
@@ -60,7 +56,6 @@ public class VKButton extends SimpleButton {
 		_overTextFormat.font = "Verdana";
 		_overTextFormat.size = 11;
 
-
 		_overText = new TextField();
 		_overText.wordWrap = false;
 		_overText.autoSize = TextFieldAutoSize.LEFT;
@@ -69,8 +64,7 @@ public class VKButton extends SimpleButton {
 		useHandCursor = true;
 	}
 
-	private function updateButton():void
-	{
+	private function updateButton():void {
 		var bgColor:uint;
 		switch (_buttonType) {
 			case 2:

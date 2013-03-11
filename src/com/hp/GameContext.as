@@ -6,13 +6,12 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp {
+import com.hp.controller.KeyboardCommand;
 import com.hp.controller.StartupCommand;
-import com.hp.model.LevelsModel;
-import com.hp.service.LoaderDataService;
 import com.hp.controller.events.TimeKeyboardEvent;
 import com.hp.model.DelaysModel;
-import com.hp.controller.KeyboardCommand;
-import flash.events.KeyboardEvent;
+import com.hp.model.LevelsModel;
+import com.hp.service.LoaderDataService;
 import com.hp.view.game.GameMediator;
 import com.hp.view.game.components.GameView;
 import com.hp.view.leaderboard.LeaderboardMediator;
@@ -21,23 +20,21 @@ import com.hp.view.level.LevelMediator;
 import com.hp.view.level.components.LevelView;
 import com.hp.view.welcome.WelcomeMediator;
 import com.hp.view.welcome.components.WelcomeView;
-import org.robotlegs.base.ContextEvent;
+
+import flash.display.DisplayObjectContainer;
+import flash.events.KeyboardEvent;
 
 import org.assetloader.AssetLoader;
-
 import org.assetloader.core.IAssetLoader;
-
+import org.robotlegs.base.ContextEvent;
 import org.robotlegs.mvcs.Context;
-import flash.display.DisplayObjectContainer;
 
 public class GameContext extends Context {
-	public function GameContext(contextView:DisplayObjectContainer)
-	{
+	public function GameContext(contextView:DisplayObjectContainer) {
 		super(contextView);
 	}
 
-	override public function startup():void
-	{
+	override public function startup():void {
 		mapComponents();
 		mapMediators();
 		mapEvents();
@@ -45,33 +42,30 @@ public class GameContext extends Context {
 		super.startup();
 	}
 
-	private function mapEvents():void
-	{
+	private function mapEvents():void {
 		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
 		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, TimeKeyboardEvent);
 	}
 
-	private function mapComponents():void
-	{
-		//Views
+	private function mapComponents():void {
+		// Views
 		injector.mapSingleton(GameView);
 		injector.mapSingleton(LevelView);
 		injector.mapSingleton(WelcomeView);
 		injector.mapSingleton(DelaysModel);
 
-		//Components
+		// Components
 		injector.mapClass(LeaderboardView, LeaderboardView);
 
-		//Models
+		// Models
 		injector.mapSingleton(LevelsModel);
 
-		//Services
+		// Services
 		injector.mapClass(LoaderDataService, LoaderDataService);
 		injector.mapSingletonOf(IAssetLoader, AssetLoader);
 	}
 
-	private function mapMediators():void
-	{
+	private function mapMediators():void {
 		mediatorMap.mapView(GameView, GameMediator);
 		mediatorMap.mapView(LeaderboardView, LeaderboardMediator);
 		mediatorMap.mapView(LevelView, LevelMediator);

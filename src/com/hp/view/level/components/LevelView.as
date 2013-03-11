@@ -9,9 +9,7 @@ package com.hp.view.level.components {
 import flash.display.Sprite;
 
 public class LevelView extends Sprite {
-
-	public function init():void
-	{
+	public function init():void {
 		log("level view created");
 	}
 }

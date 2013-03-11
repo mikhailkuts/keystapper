@@ -11,16 +11,13 @@ import com.hp.view.welcome.components.WelcomeView;
 import org.robotlegs.mvcs.Mediator;
 
 public class WelcomeMediator extends Mediator {
-
 	[Inject]
 	public var view:WelcomeView;
 
-	public function WelcomeMediator()
-	{
+	public function WelcomeMediator() {
 	}
 
-	override public function onRegister():void
-	{
+	override public function onRegister():void {
 		log("WelcomeMediator registered");
 
 		view.init();

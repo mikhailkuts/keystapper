@@ -32,11 +32,8 @@
  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOURCE CODE, EVEN IF
  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package com.vk.api.serialization.json {
-
 public class JSONToken {
-
 	private var _type:int;
 	private var _value:Object;
 
@@ -49,8 +46,7 @@ public class JSONToken {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function JSONToken(type:int = -1 /* JSONTokenType.UNKNOWN */, value:Object = null)
-	{
+	public function JSONToken(type:int = -1 /* JSONTokenType.UNKNOWN */, value:Object = null) {
 		_type = type;
 		_value = value;
 	}
@@ -63,8 +59,7 @@ public class JSONToken {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function get type():int
-	{
+	public function get type():int {
 		return _type;
 	}
 
@@ -76,8 +71,7 @@ public class JSONToken {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function set type(value:int):void
-	{
+	public function set type(value:int):void {
 		_type = value;
 	}
 
@@ -89,8 +83,7 @@ public class JSONToken {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function get value():Object
-	{
+	public function get value():Object {
 		return _value;
 	}
 
@@ -102,11 +95,8 @@ public class JSONToken {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function set value(v:Object):void
-	{
+	public function set value(v:Object):void {
 		_value = v;
 	}
-
 }
-
 }

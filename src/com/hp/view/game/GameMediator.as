@@ -17,29 +17,22 @@ import flash.events.Event;
 import org.robotlegs.mvcs.Mediator;
 
 public class GameMediator extends Mediator {
-
 	public static const ACTIVE_LEADERBOARD:String = "ActiveLeaderboard";
 	public static const ACTIVE_LEVEL:String = "ActiveLevel";
 	public static const ACTIVE_PRELOADER:String = "ActivePreloader";
 	public static const ACTIVE_WELCOME:String = "ActiveWelcome";
-
 	[Inject]
 	public var view:GameView;
-
 	[Inject]
 	public var leaderboardView:LeaderboardView;
-
 	[Inject]
 	public var levelView:LevelView;
-
 	[Inject]
 	public var welcomeView:WelcomeView;
-
 	[Inject]
 	public var levelsModel:LevelsModel;
 
-	override public function onRegister():void
-	{
+	override public function onRegister():void {
 		log("GameMediator registered");
 
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEADERBOARD, handleActiveLeaderboard, Event);
@@ -53,24 +46,20 @@ public class GameMediator extends Mediator {
 		view.init();
 	}
 
-	private function handleDataAssigned(event:Event):void
-	{
+	private function handleDataAssigned(event:Event):void {
 		for (var levelId:String in levelsModel.levelsData)
 			log(levelsModel.levelsData[levelId]);
 	}
 
-	private function handleActiveLeaderboard(event:Event):void
-	{
+	private function handleActiveLeaderboard(event:Event):void {
 		view.activeView = leaderboardView;
 	}
 
-	private function handleActiveLevel(event:Event):void
-	{
+	private function handleActiveLevel(event:Event):void {
 		view.activeView = levelView;
 	}
 
-	private function handleActiveWelcome(event:Event):void
-	{
+	private function handleActiveWelcome(event:Event):void {
 		view.activeView = welcomeView;
 	}
 }

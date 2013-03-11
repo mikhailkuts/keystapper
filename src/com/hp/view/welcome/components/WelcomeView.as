@@ -9,9 +9,7 @@ package com.hp.view.welcome.components {
 import flash.display.Sprite;
 
 public class WelcomeView extends Sprite {
-
-	public function init():void
-	{
+	public function init():void {
 	}
 }
 }

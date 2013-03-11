@@ -32,20 +32,14 @@
  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOURCE CODE, EVEN IF
  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package com.vk.api.serialization.json {
-
 public class JSONTokenizer {
-
 	/** The object that will get parsed from the JSON string */
 	private var obj:Object;
-
 	/** The JSON string to be parsed */
 	private var jsonString:String;
-
 	/** The current parsing location in the JSON string */
 	private var loc:int;
-
 	/** The current character in the JSON string during parsing */
 	private var ch:String;
 
@@ -54,10 +48,9 @@ public class JSONTokenizer {
 	 * into a native object.
 	 *
 	 * @param s The JSON string to be converted
-	 *		into a native object
+	 *        into a native object
 	 */
-	public function JSONTokenizer(s:String)
-	{
+	public function JSONTokenizer(s:String) {
 		jsonString = s;
 		loc = 0;
 
@@ -69,8 +62,7 @@ public class JSONTokenizer {
 	 * Gets the next token in the input sting and advances
 	 * the character to the next character after the token
 	 */
-	public function getNextToken():JSONToken
-	{
+	public function getNextToken():JSONToken {
 		var token:JSONToken = new JSONToken();
 
 		// skip any whitespace / comments since the last
@@ -79,46 +71,39 @@ public class JSONTokenizer {
 
 		// examine the new character and see what we have...
 		switch (ch) {
-
 			case '{':
 				token.type = JSONTokenType.LEFT_BRACE;
 				token.value = '{';
 				nextChar();
 				break
-
 			case '}':
 				token.type = JSONTokenType.RIGHT_BRACE;
 				token.value = '}';
 				nextChar();
 				break
-
 			case '[':
 				token.type = JSONTokenType.LEFT_BRACKET;
 				token.value = '[';
 				nextChar();
 				break
-
 			case ']':
 				token.type = JSONTokenType.RIGHT_BRACKET;
 				token.value = ']';
 				nextChar();
 				break
-
 			case ',':
 				token.type = JSONTokenType.COMMA;
 				token.value = ',';
 				nextChar();
 				break
-
 			case ':':
 				token.type = JSONTokenType.COLON;
 				token.value = ':';
 				nextChar();
 				break;
-
-			case 't': // attempt to read true
+			case 't':
+				// attempt to read true
 				var possibleTrue:String = "t" + nextChar() + nextChar() + nextChar();
-
 				if (possibleTrue == "true") {
 					token.type = JSONTokenType.TRUE;
 					token.value = true;
@@ -126,12 +111,10 @@ public class JSONTokenizer {
 				} else {
 					parseError("Expecting 'true' but found " + possibleTrue);
 				}
-
 				break;
-
-			case 'f': // attempt to read false
+			case 'f':
+				// attempt to read false
 				var possibleFalse:String = "f" + nextChar() + nextChar() + nextChar() + nextChar();
-
 				if (possibleFalse == "false") {
 					token.type = JSONTokenType.FALSE;
 					token.value = false;
@@ -139,13 +122,10 @@ public class JSONTokenizer {
 				} else {
 					parseError("Expecting 'false' but found " + possibleFalse);
 				}
-
 				break;
-
-			case 'n': // attempt to read null
-
+			case 'n':
+				// attempt to read null
 				var possibleNull:String = "n" + nextChar() + nextChar() + nextChar();
-
 				if (possibleNull == "null") {
 					token.type = JSONTokenType.NULL;
 					token.value = null;
@@ -153,13 +133,11 @@ public class JSONTokenizer {
 				} else {
 					parseError("Expecting 'null' but found " + possibleNull);
 				}
-
 				break;
-
-			case '"': // the start of a string
+			case '"':
+				// the start of a string
 				token = readString();
 				break;
-
 			default:
 				// see if we can read a number
 				if (isDigit(ch) || ch == '-') {
@@ -183,10 +161,9 @@ public class JSONTokenizer {
 	 * string.  It is assumed that ch is " before this method is called.
 	 *
 	 * @return the JSONToken with the string value if a string could
-	 *		be read.  Throws an error otherwise.
+	 *        be read.  Throws an error otherwise.
 	 */
-	private function readString():JSONToken
-	{
+	private function readString():JSONToken {
 		// the token for the string we'll try to read
 		var token:JSONToken = new JSONToken();
 		token.type = JSONTokenType.STRING;
@@ -198,56 +175,51 @@ public class JSONTokenizer {
 		nextChar();
 
 		while (ch != '"' && ch != '') {
-
 			// unescape the escape sequences in the string
 			if (ch == '\\') {
-
 				// get the next character so we know what
 				// to unescape
 				nextChar();
 
 				switch (ch) {
-
-					case '"': // quotation mark
+					case '"':
+						// quotation mark
 						string += '"';
 						break;
-
-					case '/':	// solidus
+					case '/':
+						// solidus
 						string += "/";
 						break;
-
-					case '\\':	// reverse solidus
+					case '\\':
+						// reverse solidus
 						string += '\\';
 						break;
-
-					case 'b':	// bell
+					case 'b':
+						// bell
 						string += '\b';
 						break;
-
-					case 'f':	// form feed
+					case 'f':
+						// form feed
 						string += '\f';
 						break;
-
-					case 'n':	// newline
+					case 'n':
+						// newline
 						string += '\n';
 						break;
-
-					case 'r':	// carriage return
+					case 'r':
+						// carriage return
 						string += '\r';
 						break;
-
-					case 't':	// horizontal tab
+					case 't':
+						// horizontal tab
 						string += '\t'
 						break;
-
 					case 'u':
 						// convert a unicode escape sequence
 						// to it's character value - expecting
 						// 4 hex digits
-
 						// save the characters as a string we'll convert to an int
 						var hexValue:String = "";
-
 						// try to find 4 hex characters
 						for (var i:int = 0; i < 4; i++) {
 							// get the next character and determine
@@ -258,30 +230,23 @@ public class JSONTokenizer {
 							// valid, add it to the value
 							hexValue += ch;
 						}
-
 						// convert hexValue to an integer, and use that
 						// integrer value to create a character to add
 						// to our string.
 						string += String.fromCharCode(parseInt(hexValue, 16));
-
 						break;
-
 					default:
 						// couldn't unescape the sequence, so just
 						// pass it through
 						string += '\\' + ch;
-
 				}
-
 			} else {
 				// didn't have to unescape, so add the character to the string
 				string += ch;
-
 			}
 
 			// move to the next character
 			nextChar();
-
 		}
 
 		// we read past the end of the string without closing it, which
@@ -305,10 +270,9 @@ public class JSONTokenizer {
 	 * number.
 	 *
 	 * @return The JSONToken with the number value if a number could
-	 *		 be read.  Throws an error otherwise.
+	 *         be read.  Throws an error otherwise.
 	 */
-	private function readNumber():JSONToken
-	{
+	private function readNumber():JSONToken {
 		// the token for the number we'll try to read
 		var token:JSONToken = new JSONToken();
 		token.type = JSONTokenType.NUMBER;
@@ -338,8 +302,7 @@ public class JSONTokenizer {
 			if (isDigit(ch)) {
 				parseError("A digit cannot immediately follow 0");
 			}
-		}
-		else {
+		} else {
 			// read numbers while we can
 			while (isDigit(ch)) {
 				input += ch;
@@ -404,10 +367,9 @@ public class JSONTokenizer {
 	 * string and advances the character location.
 	 *
 	 * @return The next character in the input string, or
-	 *		null if we've read past the end.
+	 *        null if we've read past the end.
 	 */
-	private function nextChar():String
-	{
+	private function nextChar():String {
 		return ch = jsonString.charAt(loc++);
 	}
 
@@ -415,8 +377,7 @@ public class JSONTokenizer {
 	 * Advances the character location past any
 	 * sort of white space and comments
 	 */
-	private function skipIgnored():void
-	{
+	private function skipIgnored():void {
 		skipWhite();
 		skipComments();
 		skipWhite();
@@ -427,30 +388,25 @@ public class JSONTokenizer {
 	 * single-line or multi-line.  Advances the character
 	 * to the first position after the end of the comment.
 	 */
-	private function skipComments():void
-	{
+	private function skipComments():void {
 		if (ch == '/') {
 			// Advance past the first / to find out what type of comment
 			nextChar();
 			switch (ch) {
-				case '/': // single-line comment, read through end of line
-
+				case '/':
+					// single-line comment, read through end of line
 					// Loop over the characters until we find
 					// a newline or until there's no more characters left
 					do {
 						nextChar();
 					} while (ch != '\n' && ch != '')
-
 					// move past the \n
 					nextChar();
-
 					break;
-
-				case '*': // multi-line comment, read until closing */
-
+				case '*':
+					// multi-line comment, read until closing */
 					// move past the opening *
 					nextChar();
-
 					// try to find a trailing */
 					while (true) {
 						if (ch == '*') {
@@ -472,43 +428,35 @@ public class JSONTokenizer {
 							parseError("Multi-line comment not closed");
 						}
 					}
-
 					break;
-
 				// Can't match a comment after a /, so it's a parsing error
 				default:
 					parseError("Unexpected " + ch + " encountered (expecting '/' or '*' )");
 			}
 		}
-
 	}
-
 
 	/**
 	 * Skip any whitespace in the input string and advances
 	 * the character to the first character after any possible
 	 * whitespace.
 	 */
-	private function skipWhite():void
-	{
-
+	private function skipWhite():void {
 		// As long as there are spaces in the input
 		// stream, advance the current location pointer
 		// past them
 		while (isWhiteSpace(ch)) {
 			nextChar();
 		}
-
 	}
 
 	/**
 	 * Determines if a character is whitespace or not.
 	 *
 	 * @return True if the character passed in is a whitespace
-	 *	character
+	 *    character
 	 */
-	private function isWhiteSpace(ch:String):Boolean
-	{
+	private function isWhiteSpace(ch:String):Boolean {
 		return ( ch == ' ' || ch == '\t' || ch == '\n' );
 	}
 
@@ -517,8 +465,7 @@ public class JSONTokenizer {
 	 *
 	 * @return True if the character passed in is a digit
 	 */
-	private function isDigit(ch:String):Boolean
-	{
+	private function isDigit(ch:String):Boolean {
 		return ( ch >= '0' && ch <= '9' );
 	}
 
@@ -527,8 +474,7 @@ public class JSONTokenizer {
 	 *
 	 * @return True if the character passed in is a digit
 	 */
-	private function isHexDigit(ch:String):Boolean
-	{
+	private function isHexDigit(ch:String):Boolean {
 		// get the uppercase value of ch so we only have
 		// to compare the value between 'A' and 'F'
 		var uc:String = ch.toUpperCase();
@@ -544,10 +490,8 @@ public class JSONTokenizer {
 	 *
 	 * @param message The message indicating why the error occurred
 	 */
-	public function parseError(message:String):void
-	{
+	public function parseError(message:String):void {
 		throw new JSONParseError(message, loc, jsonString);
 	}
 }
-
 }

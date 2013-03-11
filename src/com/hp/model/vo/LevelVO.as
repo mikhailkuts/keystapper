@@ -10,13 +10,11 @@ import flash.media.Sound;
 
 import org.robotlegs.mvcs.Actor;
 
-public class LevelVO extends Actor
-{
+public class LevelVO extends Actor {
 	public var track:Sound;
 	public var notes:Vector.<NoteVO> = new Vector.<NoteVO>();
 
-	public function LevelVO():void
-	{
+	public function LevelVO():void {
 		super();
 	}
 }

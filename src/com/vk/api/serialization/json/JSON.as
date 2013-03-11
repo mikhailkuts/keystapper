@@ -32,24 +32,20 @@
  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOURCE CODE, EVEN IF
  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package com.vk.api.serialization.json {
-
 /**
  * This class provides encoding and decoding of the JSON format.
  *
  * Example usage:
  * <code>
- *		 // create a JSON string from an internal object
- *		 JSON.encode( myObject );
+ *         // create a JSON string from an internal object
+ *         JSON.encode( myObject );
  *
- *		// read a JSON string into an internal object
- *		var myObject:Object = JSON.decode( jsonString );
- *	</code>
+ *        // read a JSON string into an internal object
+ *        var myObject:Object = JSON.decode( jsonString );
+ *    </code>
  */
 public class JSON {
-
-
 	/**
 	 * Encodes a object into a JSON string.
 	 *
@@ -59,12 +55,9 @@ public class JSON {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public static function encode(o:Object):String
-	{
-
+	public static function encode(o:Object):String {
 		var encoder:JSONEncoder = new JSONEncoder(o);
 		return encoder.getString();
-
 	}
 
 	/**
@@ -77,14 +70,9 @@ public class JSON {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public static function decode(s:String):*
-	{
-
+	public static function decode(s:String):* {
 		var decoder:JSONDecoder = new JSONDecoder(s)
 		return decoder.getValue();
-
 	}
-
 }
-
 }

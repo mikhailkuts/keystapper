@@ -9,9 +9,7 @@ package com.hp.view.leaderboard.components {
 import flash.display.Sprite;
 
 public class LeaderboardView extends Sprite {
-
-	public function init():void
-	{
+	public function init():void {
 	}
 }
 }
