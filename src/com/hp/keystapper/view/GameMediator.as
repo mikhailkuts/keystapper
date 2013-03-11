@@ -54,7 +54,6 @@ public class GameMediator extends Mediator {
 
 	private function handleActivePreloader(event:Event):void
 	{
-		log("handleActivePreloader");
 		this.activeView = preloaderView;
 	}
 
@@ -70,7 +69,6 @@ public class GameMediator extends Mediator {
 
 	private function handleActiveWelcome(event:Event):void
 	{
-		log("handleActiveWelcome");
 		this.activeView = welcomeView;
 	}
 	public function set activeView(aview:Sprite):void
