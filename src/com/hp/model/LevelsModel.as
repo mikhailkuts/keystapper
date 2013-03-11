@@ -6,36 +6,28 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.model {
-import com.hp.model.vo.LevelVO;
+	import org.robotlegs.mvcs.Actor;
 
-import flash.events.Event;
+	import flash.events.Event;
+	import flash.utils.Dictionary;
 
-import flash.utils.Dictionary;
+	public class LevelsModel extends Actor {
+		public static const DATA_ASSIGNED : String = "DataAssigned";
+		private var _levels : Dictionary;
 
-import org.robotlegs.mvcs.Actor;
+		public function LevelsModel() {
+			super();
+		}
 
-public class LevelsModel extends Actor {
+		public function set levelsData(data : Dictionary) : void {
+			_levels = data;
 
-	public static const DATA_ASSIGNED:String = "DataAssigned";
+			eventDispatcher.dispatchEvent(new Event(DATA_ASSIGNED));
+		}
 
-	private var _levels:Dictionary;
-
-	public function LevelsModel()
-	{
-		super();
+		public function get levelsData() : Dictionary {
+			return _levels;
+		}
 	}
-
-	public function set levelsData(data:Dictionary):void
-	{
-		_levels = data;
-
-		eventDispatcher.dispatchEvent(new Event(DATA_ASSIGNED));
-	}
-
-	public function get levelsData():Dictionary
-	{
-		return _levels;
-	}
-
-}
+	
 }

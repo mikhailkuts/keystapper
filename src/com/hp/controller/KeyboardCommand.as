@@ -9,12 +9,11 @@ package com.hp.controller {
 	 * created 11.03.2013
 	 */
 	public class KeyboardCommand extends Command {
-		
 		[Inject]
-		public var event:TimeKeyboardEvent;
+		public var event : TimeKeyboardEvent;
 		[Inject]
-		public var delays:DelaysModel;
-		
+		public var delays : DelaysModel;
+
 		public function KeyboardCommand() {
 		}
 

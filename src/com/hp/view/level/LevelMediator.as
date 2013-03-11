@@ -7,6 +7,7 @@
  */
 package com.hp.view.level {
 	import flash.utils.getTimer;
+
 	import com.hp.controller.events.TimeKeyboardEvent;
 	import com.hp.view.level.components.LevelView;
 	import com.hp.model.DelaysModel;
@@ -17,26 +18,22 @@ package com.hp.view.level {
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 
-
-
 	public class LevelMediator extends Mediator {
 		[Inject]
 		public var view : LevelView;
 		[Inject]
 		public var _delaysManager : DelaysModel;
-		
 		private var _timer : Timer;
 		private var _startTime : int;
-		
+
 		public function LevelMediator() {
 			_timer = new Timer(100);
 			_timer.addEventListener(TimerEvent.TIMER, timerHandler);
 		}
 
 		override public function onRegister() : void {
-			
 			super.onRegister();
-			
+
 			view.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			view.init();
 
@@ -53,10 +50,10 @@ package com.hp.view.level {
 			_delaysManager.parse(data);
 			start();
 		}
-		private function timerHandler(event : TimerEvent) : void 
-		{
-			
+
+		private function timerHandler(event : TimerEvent) : void {
 		}
+
 		private function keyDownHandler(event : KeyboardEvent) : void {
 			dispatch(new TimeKeyboardEvent(event, getTimer() - _startTime));
 		}
@@ -66,6 +63,7 @@ package com.hp.view.level {
 			view.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			super.onRemove();
 		}
+
 		private function start() : void {
 			_timer.start();
 		}

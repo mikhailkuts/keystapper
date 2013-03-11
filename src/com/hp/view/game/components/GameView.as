@@ -6,26 +6,21 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.view.game.components {
-import flash.display.Sprite;
+	import flash.display.Sprite;
 
-public class GameView extends Sprite {
+	public class GameView extends Sprite {
+		public static const NAME : String = "Game";
+		private var _activeView : Sprite;
 
-	public static const NAME:String = "Game";
+		public function init() : void {
+		}
 
-	private var _activeView:Sprite;
+		public function set activeView(view : Sprite) : void {
+			if (_activeView)
+				removeChild(_activeView);
 
-	public function init():void
-	{
+			_activeView = view;
+			addChild(_activeView);
+		}
 	}
-
-	public function set activeView(view:Sprite):void
-	{
-		if (_activeView)
-			removeChild(_activeView);
-
-		_activeView = view;
-		addChild(_activeView);
-
-	}
-}
 }

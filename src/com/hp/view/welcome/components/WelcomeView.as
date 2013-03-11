@@ -6,12 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.view.welcome.components {
-import flash.display.Sprite;
+	import flash.display.Sprite;
 
-public class WelcomeView extends Sprite {
-
-	public function init():void
-	{
+	public class WelcomeView extends Sprite {
+		public function init() : void {
+		}
 	}
-}
 }

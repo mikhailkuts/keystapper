@@ -6,10 +6,9 @@ package com.hp.controller.events {
 	 * created 11.03.2013
 	 */
 	public class TimeKeyboardEvent extends KeyboardEvent {
-		
 		private var _time : int;
-		
-		public function TimeKeyboardEvent(event:KeyboardEvent, time:int) {
+
+		public function TimeKeyboardEvent(event : KeyboardEvent, time : int) {
 			_time = time;
 			super(event.type, event.bubbles, event.cancelable, event.charCode, event.keyCode, event.keyLocation, event.ctrlKey, event.altKey, event.shiftKey);
 		}
