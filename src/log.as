@@ -8,6 +8,7 @@ package
 	 */
 	public function log(...params):void
 	{
-		ExternalInterface.call("console.log", params.join(" "));
+		trace(params);
+		//ExternalInterface.call("console.log", params.join(" "));
 	}
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<loader connections="1" >
+    <group id="Level1">
+        <asset id="Track" src="data/track1.mp3" />
+        <asset id="Notes" src="data/track1.xml" />
+    </group>
+    <group id="Level2">
+        <asset id="Track" src="data/track2.mp3" />
+        <asset id="Notes" src="data/track2.xml" />
+    </group>
+    <group id="Level3">
+        <asset id="Track" src="data/track3.mp3" />
+        <asset id="Notes" src="data/track3.xml" />
+    </group>
+
+</loader>

@@ -6,7 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp {
-import com.hp.controller.StartupCompleteCommand;
+import com.hp.controller.StartupCommand;
+import com.hp.model.LevelsModel;
+import com.hp.service.LoaderDataService;
 import com.hp.view.game.GameMediator;
 import com.hp.view.game.components.GameView;
 import com.hp.view.leaderboard.LeaderboardMediator;
@@ -23,6 +25,7 @@ import org.assetloader.AssetLoader;
 import org.assetloader.core.IAssetLoader;
 
 import org.robotlegs.base.ContextEvent;
+
 import org.robotlegs.mvcs.Context;
 
 public class GameContext extends Context {
@@ -33,28 +36,34 @@ public class GameContext extends Context {
 
 	override public function startup():void
 	{
-		mapEvents();
 		mapComponents();
 		mapMediators();
+		mapEvents();
 
 		super.startup();
 	}
 
 	private function mapEvents():void
 	{
-		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCompleteCommand, ContextEvent, true);
-		//commandMap.mapEvent(AssetLoaderEvent.CONFIG_LOADED, ConfigLoadedCommand, AssetLoaderEvent, true);
+		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
 	}
 
 	private function mapComponents():void
 	{
+		//Views
 		injector.mapSingleton(GameView);
 		injector.mapSingleton(LevelView);
 		injector.mapSingleton(WelcomeView);
 
-		injector.mapSingletonOf(IAssetLoader, AssetLoader);
-
+		//Components
 		injector.mapClass(LeaderboardView, LeaderboardView);
+
+		//Models
+		injector.mapSingleton(LevelsModel);
+
+		//Services
+		injector.mapClass(LoaderDataService, LoaderDataService);
+		injector.mapSingletonOf(IAssetLoader, AssetLoader);
 	}
 
 	private function mapMediators():void
