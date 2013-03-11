@@ -10,6 +10,8 @@ import com.hp.keystapper.model.vo.LevelVO;
 import com.hp.keystapper.model.vo.NoteVO;
 
 import flash.events.Event;
+import flash.events.TimerEvent;
+import flash.utils.getTimer;
 
 import org.robotlegs.mvcs.Actor;
 
@@ -21,40 +23,32 @@ public class LevelsModel extends Actor {
 	public static const LEVEL_CHANGED:String = "onLevelChanged";
 
 	private var _levels:Vector.<LevelVO>;
-	private var _ready:Boolean;
 	private var _currentLevelID:int = 0;
+	private var _startTime:int = 0;
+	private var _currentTime:int = 0;
 
 	public function LevelsModel() {
 		super();
 	}
 
-	public function getDelaysForTime(time:int, state:int = 1):Vector.<NoteVO> {
-		/*var d:Vector.<NoteVO> = new Vector.<NoteVO>();
-		 var cd:NoteVO;
-		 for (var i:int = 0; i < _levels.length; i++) {
-		 cd = _levels[i];
-		 if (cd.getStateForTime(time) == state) {
-		 d.push(cd);
-		 }
-		 }
-		 return d;*/
-		return null;
+	public function start():void
+	{
+		_startTime = getTimer();
 	}
-
-
+	public function updateTime(event:TimerEvent = null):void
+	{
+		_currentTime = getTimer() - _startTime;
+	}
+	
 	public function get levels():Vector.<LevelVO> {
 		return _levels;
 	}
 
 	public function set levels(value:Vector.<LevelVO>):void {
 		_levels = value;
-		_ready = true;
 		eventDispatcher.dispatchEvent(new Event(DATA_ASSIGNED));
 	}
 
-	public function get ready():Boolean {
-		return _ready;
-	}
 	public function get currentLevel():LevelVO
 	{
 		return levels[_currentLevelID];
@@ -68,6 +62,16 @@ public class LevelsModel extends Actor {
 	{
 		_currentLevelID = value;
 		dispatch(new Event(LEVEL_CHANGED));
+	}
+
+	public function set startTime(value:int):void
+	{
+		_startTime = value;
+	}
+
+	public function get currentTime():int
+	{
+		return _currentTime;
 	}
 }
 

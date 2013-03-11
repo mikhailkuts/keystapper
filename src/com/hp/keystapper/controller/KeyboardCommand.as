@@ -1,6 +1,7 @@
 package com.hp.keystapper.controller {
-import com.hp.keystapper.events.TimeKeyboardEvent;
 import com.hp.keystapper.model.LevelsModel;
+
+import flash.events.KeyboardEvent;
 
 import org.robotlegs.mvcs.Command;
 
@@ -10,16 +11,16 @@ import org.robotlegs.mvcs.Command;
 	 */
 	public class KeyboardCommand extends Command {
 		[Inject]
-		public var event : TimeKeyboardEvent;
+		public var event : KeyboardEvent;
 		[Inject]
-		public var delays : LevelsModel;
+		public var levelsModel : LevelsModel;
 
 		public function KeyboardCommand() {
 		}
 
 		override public function execute() : void {
 			super.execute();
-			log(event.keyCode, event.time);
+			log(event.keyCode, levelsModel.currentTime);
 		}
 	}
 }

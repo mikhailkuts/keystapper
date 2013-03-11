@@ -13,13 +13,10 @@ import assets.PreloaderView;
 import assets.WelcomeView;
 
 import com.hp.keystapper.controller.KeyboardCommand;
-
 import com.hp.keystapper.controller.StartupCommand;
-import com.hp.keystapper.events.TimeKeyboardEvent;
 import com.hp.keystapper.model.LevelsModel;
 import com.hp.keystapper.service.LoaderDataService;
 import com.hp.keystapper.view.GameMediator;
-
 import com.hp.keystapper.view.LeaderboardMediator;
 import com.hp.keystapper.view.LevelMediator;
 import com.hp.keystapper.view.PreloaderMediator;
@@ -49,7 +46,7 @@ public class GameContext extends Context {
 
 		// Commands
 		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
-		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, TimeKeyboardEvent);
+		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, KeyboardEvent);
 
 		//Mediators
 		mediatorMap.mapView(GameView, GameMediator);
