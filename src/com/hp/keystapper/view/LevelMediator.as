@@ -5,21 +5,19 @@
  * Time: 1:31
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.view.level {
-import com.hp.events.TimeKeyboardEvent;
-import com.hp.model.LevelsModel;
+package com.hp.keystapper.view {
+import assets.LevelView;
+
+import com.hp.keystapper.events.TimeKeyboardEvent;
+import com.hp.keystapper.model.LevelsModel;
 
 import flash.events.Event;
-
-import flash.utils.getTimer;
-
-import com.hp.view.level.components.LevelView;
-
-import org.robotlegs.mvcs.Mediator;
-
 import flash.events.KeyboardEvent;
 import flash.events.TimerEvent;
 import flash.utils.Timer;
+import flash.utils.getTimer;
+
+import org.robotlegs.mvcs.Mediator;
 
 public class LevelMediator extends Mediator {
 	[Inject]
@@ -50,7 +48,6 @@ public class LevelMediator extends Mediator {
 		}
 
 		view.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
-		view.init();
 		start();
 	}
 

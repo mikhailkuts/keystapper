@@ -5,8 +5,8 @@
  * Time: 1:32
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.view.leaderboard {
-import com.hp.view.leaderboard.components.LeaderboardView;
+package com.hp.keystapper.view {
+import assets.LeaderboardView;
 
 import org.robotlegs.mvcs.Mediator;
 

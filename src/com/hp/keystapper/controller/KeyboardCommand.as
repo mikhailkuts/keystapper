@@ -1,10 +1,10 @@
-package com.hp.controller {
-import com.hp.events.TimeKeyboardEvent;
-import com.hp.model.LevelsModel;
+package com.hp.keystapper.controller {
+import com.hp.keystapper.events.TimeKeyboardEvent;
+import com.hp.keystapper.model.LevelsModel;
 
-	import org.robotlegs.mvcs.Command;
+import org.robotlegs.mvcs.Command;
 
-	/**
+/**
 	 * @author Alexander Slavschik <kvinty@icloud.com>
 	 * created 11.03.2013
 	 */

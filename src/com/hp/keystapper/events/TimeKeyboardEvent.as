@@ -1,7 +1,7 @@
-package com.hp.events {
-	import flash.events.KeyboardEvent;
+package com.hp.keystapper.events {
+import flash.events.KeyboardEvent;
 
-	/**
+/**
 	 * @author Alexander Slavschik <kvinty@icloud.com>
 	 * created 11.03.2013
 	 */

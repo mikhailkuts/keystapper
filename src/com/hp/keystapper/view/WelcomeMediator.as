@@ -5,10 +5,10 @@
  * Time: 1:32
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.view {
+package com.hp.keystapper.view {
 import assets.WelcomeView;
 
-import com.hp.model.LevelsModel;
+import com.hp.keystapper.model.LevelsModel;
 
 import flash.events.MouseEvent;
 

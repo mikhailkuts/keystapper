@@ -5,14 +5,14 @@
  * Time: 1:31
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.view {
+package com.hp.keystapper.view {
 import assets.GameView;
+import assets.LeaderboardView;
+import assets.LevelView;
 import assets.PreloaderView;
 import assets.WelcomeView;
 
-import com.hp.model.LevelsModel;
-import com.hp.view.leaderboard.components.LeaderboardView;
-import com.hp.view.level.components.LevelView;
+import com.hp.keystapper.model.LevelsModel;
 
 import flash.display.Sprite;
 import flash.events.Event;

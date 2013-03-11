@@ -5,33 +5,33 @@
  * Time: 1:27
  * To change this template use File | Settings | File Templates.
  */
-package com.hp {
+package com.hp.keystapper {
 import assets.GameView;
+import assets.LeaderboardView;
+import assets.LevelView;
 import assets.PreloaderView;
 import assets.WelcomeView;
 
-import com.hp.controller.StartupCommand;
-import com.hp.events.TimeKeyboardEvent;
-import com.hp.model.LevelsModel;
-import com.hp.service.LoaderDataService;
-import com.hp.controller.KeyboardCommand;
-import com.hp.view.PreloaderMediator;
+import com.hp.keystapper.controller.KeyboardCommand;
 
-import flash.events.KeyboardEvent;
+import com.hp.keystapper.controller.StartupCommand;
+import com.hp.keystapper.events.TimeKeyboardEvent;
+import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.service.LoaderDataService;
+import com.hp.keystapper.view.GameMediator;
 
-import com.hp.view.GameMediator;
-import com.hp.view.leaderboard.LeaderboardMediator;
-import com.hp.view.leaderboard.components.LeaderboardView;
-import com.hp.view.level.LevelMediator;
-import com.hp.view.level.components.LevelView;
-import com.hp.view.WelcomeMediator;
-
-import org.robotlegs.base.ContextEvent;
-import org.assetloader.AssetLoader;
-import org.assetloader.core.IAssetLoader;
-import org.robotlegs.mvcs.Context;
+import com.hp.keystapper.view.LeaderboardMediator;
+import com.hp.keystapper.view.LevelMediator;
+import com.hp.keystapper.view.PreloaderMediator;
+import com.hp.keystapper.view.WelcomeMediator;
 
 import flash.display.DisplayObjectContainer;
+import flash.events.KeyboardEvent;
+
+import org.assetloader.AssetLoader;
+import org.assetloader.core.IAssetLoader;
+import org.robotlegs.base.ContextEvent;
+import org.robotlegs.mvcs.Context;
 
 public class GameContext extends Context {
 	public function GameContext(contextView:DisplayObjectContainer) {
@@ -39,9 +39,6 @@ public class GameContext extends Context {
 	}
 
 	override public function startup():void {
-
-		// Components
-		injector.mapClass(LeaderboardView, LeaderboardView);
 
 		// Models
 		injector.mapSingleton(LevelsModel);
@@ -64,7 +61,9 @@ public class GameContext extends Context {
 		// Views
 		injector.mapSingleton(GameView);
 		injector.mapSingleton(LevelView);
+		injector.mapSingleton(LeaderboardView);
 		injector.mapSingleton(WelcomeView);
+		injector.mapSingleton(PreloaderView);
 
 		super.startup();
 

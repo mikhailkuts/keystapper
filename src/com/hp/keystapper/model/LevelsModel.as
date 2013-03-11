@@ -5,12 +5,11 @@
  * Time: 12:07 AM
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.model {
-import com.hp.model.vo.LevelVO;
-import com.hp.model.vo.NoteVO;
+package com.hp.keystapper.model {
+import com.hp.keystapper.model.vo.LevelVO;
+import com.hp.keystapper.model.vo.NoteVO;
 
 import flash.events.Event;
-import flash.utils.Dictionary;
 
 import org.robotlegs.mvcs.Actor;
 

@@ -5,14 +5,13 @@
  * Time: 10:49 PM
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.service {
-import com.hp.model.LevelsModel;
-import com.hp.model.vo.LevelVO;
-import com.hp.model.vo.NoteVO;
-import com.hp.view.GameMediator;
+package com.hp.keystapper.service {
+import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.vo.LevelVO;
+import com.hp.keystapper.model.vo.NoteVO;
+import com.hp.keystapper.view.GameMediator;
 
 import flash.events.Event;
-
 import flash.media.Sound;
 import flash.utils.Dictionary;
 

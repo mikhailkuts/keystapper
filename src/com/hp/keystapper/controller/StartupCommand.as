@@ -1,9 +1,10 @@
-package com.hp.controller {
-import assets.GameView;
+package com.hp.keystapper.controller {
 
-import com.hp.service.LoaderDataService;
-import com.hp.view.GameMediator;
-import com.hp.view.level.components.LevelView;
+import assets.GameView;
+import assets.LevelView;
+
+import com.hp.keystapper.service.LoaderDataService;
+import com.hp.keystapper.view.GameMediator;
 
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
