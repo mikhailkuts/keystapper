@@ -9,6 +9,11 @@ package com.hp {
 import com.hp.controller.StartupCommand;
 import com.hp.model.LevelsModel;
 import com.hp.service.LoaderDataService;
+import com.hp.view.level.events.TimeKeyboardEvent;
+import com.hp.view.level.model.DelaysModel;
+import com.hp.view.level.commands.KeyboardCommand;
+import flash.events.KeyboardEvent;
+import com.hp.controller.StartupCompleteCommand;
 import com.hp.view.game.GameMediator;
 import com.hp.view.game.components.GameView;
 import com.hp.view.leaderboard.LeaderboardMediator;
@@ -17,16 +22,14 @@ import com.hp.view.level.LevelMediator;
 import com.hp.view.level.components.LevelView;
 import com.hp.view.welcome.WelcomeMediator;
 import com.hp.view.welcome.components.WelcomeView;
-
-import flash.display.DisplayObjectContainer;
+import org.robotlegs.base.ContextEvent;
 
 import org.assetloader.AssetLoader;
 
 import org.assetloader.core.IAssetLoader;
 
-import org.robotlegs.base.ContextEvent;
-
 import org.robotlegs.mvcs.Context;
+import flash.display.DisplayObjectContainer;
 
 public class GameContext extends Context {
 	public function GameContext(contextView:DisplayObjectContainer)
@@ -46,6 +49,8 @@ public class GameContext extends Context {
 	private function mapEvents():void
 	{
 		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
+		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCompleteCommand, ContextEvent, true);
+		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, TimeKeyboardEvent);
 	}
 
 	private function mapComponents():void
@@ -54,6 +59,7 @@ public class GameContext extends Context {
 		injector.mapSingleton(GameView);
 		injector.mapSingleton(LevelView);
 		injector.mapSingleton(WelcomeView);
+		injector.mapSingleton(DelaysModel);
 
 		//Components
 		injector.mapClass(LeaderboardView, LeaderboardView);

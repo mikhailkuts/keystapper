@@ -14,9 +14,7 @@ package com.hp.controller {
 
 		override public function execute() : void 
 		{
-			contextView.stage.scaleMode = StageScaleMode.NO_SCALE;
-			contextView.stage.align = StageAlign.TOP_LEFT;
-			contextView.addChild(new GameView());
+
 		}
 	}
 }

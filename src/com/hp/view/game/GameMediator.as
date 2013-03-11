@@ -48,6 +48,8 @@ public class GameMediator extends Mediator {
 
 		eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
 
+		eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
+
 		view.init();
 	}
 
