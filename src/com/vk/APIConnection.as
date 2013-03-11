@@ -12,19 +12,14 @@ public class APIConnection extends EventDispatcher {
 	private var sendingLC:LocalConnection;
 	private var connectionName:String;
 	private var receivingLC:LocalConnection;
-
 	private var pendingRequests:Array;
 	private var loaded:Boolean = false;
-
 	private var directApiAccess:Boolean = false;
-
 	private var apiCallId:Number = 0;
 	private var apiCalls:Object = new Object();
-
 	private var dp:DataProvider;
 
-	public function APIConnection(...params)
-	{
+	public function APIConnection(...params) {
 		var connectionName:String;
 		if (typeof(params[0]) == 'string') {
 			connectionName = params[0];
@@ -44,25 +39,7 @@ public class APIConnection extends EventDispatcher {
 
 		receivingLC = new LocalConnection();
 		receivingLC.allowDomain('*');
-		receivingLC.client = {
-			initConnection:initConnection,
-			onBalanceChanged:onBalanceChanged,
-			onSettingsChanged:onSettingsChanged,
-			onLocationChanged:onLocationChanged,
-			onWindowResized:onWindowResized,
-			onApplicationAdded:onApplicationAdded,
-			onWindowBlur:onWindowBlur,
-			onWindowFocus:onWindowFocus,
-			onWallPostSave:onWallPostSave,
-			onWallPostCancel:onWallPostCancel,
-			onProfilePhotoSave:onProfilePhotoSave,
-			onProfilePhotoCancel:onProfilePhotoCancel,
-			onMerchantPaymentSuccess:onMerchantPaymentSuccess,
-			onMerchantPaymentCancel:onMerchantPaymentCancel,
-			onMerchantPaymentFail:onMerchantPaymentFail,
-			apiCallback:apiCallback,
-			customEvent:customEvent
-		};
+		receivingLC.client = {initConnection:initConnection, onBalanceChanged:onBalanceChanged, onSettingsChanged:onSettingsChanged, onLocationChanged:onLocationChanged, onWindowResized:onWindowResized, onApplicationAdded:onApplicationAdded, onWindowBlur:onWindowBlur, onWindowFocus:onWindowFocus, onWallPostSave:onWallPostSave, onWallPostCancel:onWallPostCancel, onProfilePhotoSave:onProfilePhotoSave, onProfilePhotoCancel:onProfilePhotoCancel, onMerchantPaymentSuccess:onMerchantPaymentSuccess, onMerchantPaymentCancel:onMerchantPaymentCancel, onMerchantPaymentFail:onMerchantPaymentFail, apiCallback:apiCallback, customEvent:customEvent};
 		try {
 			receivingLC.connect("_out_" + connectionName);
 		} catch (error:ArgumentError) {
@@ -75,15 +52,13 @@ public class APIConnection extends EventDispatcher {
 	/*
 	 * Public methods
 	 */
-	public function callMethod(...params):void
-	{
+	public function callMethod(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift("callMethod");
 		sendData.apply(this, paramsArr);
 	}
 
-	public function debug(msg:*):void
-	{
+	public function debug(msg:*):void {
 		if (!msg || !msg.toString) {
 			return;
 		}
@@ -91,13 +66,11 @@ public class APIConnection extends EventDispatcher {
 	}
 
 	// direct access to api (wall.post would not work)
-	public function forceDirectApiAccess(enable:Boolean = true):void
-	{
+	public function forceDirectApiAccess(enable:Boolean = true):void {
 		directApiAccess = enable;
 	}
 
-	public function api(method:String, params:Object, onComplete:Function = null, onError:Function = null):void
-	{
+	public function api(method:String, params:Object, onComplete:Function = null, onError:Function = null):void {
 		if (!sendingLC || directApiAccess) {
 			var options:Object = new Object();
 			options['params'] = params;
@@ -106,8 +79,7 @@ public class APIConnection extends EventDispatcher {
 			dp.request(method, options);
 		} else {
 			var callId:Number = apiCallId++;
-			apiCalls[callId] = function (data:Object):void
-			{
+			apiCalls[callId] = function (data:Object):void {
 				if (data.error) {
 					onError(data.error);
 				} else {
@@ -118,16 +90,14 @@ public class APIConnection extends EventDispatcher {
 		}
 	}
 
-	public function navigateToURL(url:String, window:String = "_self"):void
-	{
+	public function navigateToURL(url:String, window:String = "_self"):void {
 		this.callMethod("navigateToURL", url, window);
 	}
 
 	/*
 	 * Callbacks
 	 */
-	private function initConnection():void
-	{
+	private function initConnection():void {
 		if (loaded) return;
 		loaded = true;
 		debug("Connection initialized.");
@@ -135,8 +105,7 @@ public class APIConnection extends EventDispatcher {
 		sendPendingRequests();
 	}
 
-	public function customEvent(...params):void
-	{
+	public function customEvent(...params):void {
 		var paramsArr:Array = params as Array;
 		var eventName:String = paramsArr.shift();
 		debug(eventName);
@@ -148,106 +117,91 @@ public class APIConnection extends EventDispatcher {
 	/*
 	 * Obsolete callbacks
 	 */
-	private function onBalanceChanged(...params):void
-	{
+	private function onBalanceChanged(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onBalanceChanged')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onSettingsChanged(...params):void
-	{
+	private function onSettingsChanged(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onSettingsChanged')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onLocationChanged(...params):void
-	{
+	private function onLocationChanged(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onLocationChanged')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onWindowResized(...params):void
-	{
+	private function onWindowResized(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onWindowResized')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onApplicationAdded(...params):void
-	{
+	private function onApplicationAdded(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onApplicationAdded')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onWindowBlur(...params):void
-	{
+	private function onWindowBlur(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onWindowBlur')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onWindowFocus(...params):void
-	{
+	private function onWindowFocus(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onWindowFocus')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onWallPostSave(...params):void
-	{
+	private function onWallPostSave(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onWallPostSave')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onWallPostCancel(...params):void
-	{
+	private function onWallPostCancel(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onWallPostCancel')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onProfilePhotoSave(...params):void
-	{
+	private function onProfilePhotoSave(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onProfilePhotoSave')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onProfilePhotoCancel(...params):void
-	{
+	private function onProfilePhotoCancel(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onProfilePhotoCancel')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onMerchantPaymentSuccess(...params):void
-	{
+	private function onMerchantPaymentSuccess(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onMerchantPaymentSuccess')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onMerchantPaymentCancel(...params):void
-	{
+	private function onMerchantPaymentCancel(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onMerchantPaymentCancel')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function onMerchantPaymentFail(...params):void
-	{
+	private function onMerchantPaymentFail(...params):void {
 		var paramsArr:Array = params as Array;
 		paramsArr.unshift('onMerchantPaymentFail')
 		customEvent.apply(this, paramsArr);
 	}
 
-	private function apiCallback(callId:Number, data:Object):void
-	{
+	private function apiCallback(callId:Number, data:Object):void {
 		apiCalls[callId](data);
 		delete apiCalls[callId];
 	}
@@ -255,15 +209,13 @@ public class APIConnection extends EventDispatcher {
 	/*
 	 * Private methods
 	 */
-	private function sendPendingRequests():void
-	{
+	private function sendPendingRequests():void {
 		while (pendingRequests.length) {
 			sendData.apply(this, pendingRequests.shift());
 		}
 	}
 
-	private function sendData(...params):void
-	{
+	private function sendData(...params):void {
 		var paramsArr:Array = params as Array;
 		if (loaded) {
 			paramsArr.unshift("_in_" + connectionName);
@@ -273,8 +225,7 @@ public class APIConnection extends EventDispatcher {
 		}
 	}
 
-	private function onInitStatus(e:StatusEvent):void
-	{
+	private function onInitStatus(e:StatusEvent):void {
 		debug("StatusEvent: " + e.level);
 		e.target.removeEventListener(e.type, onInitStatus);
 		if (e.level == "status") {

@@ -32,13 +32,10 @@
  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOURCE CODE, EVEN IF
  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package com.vk.api.serialization.json {
-
 import flash.utils.describeType;
 
 public class JSONEncoder {
-
 	/** The string that is going to represent the object we're encoding */
 	private var jsonString:String;
 
@@ -50,23 +47,20 @@ public class JSONEncoder {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function JSONEncoder(value:*)
-	{
+	public function JSONEncoder(value:*) {
 		jsonString = convertToString(value);
-
 	}
 
 	/**
 	 * Gets the JSON string from the encoder.
 	 *
 	 * @return The JSON string representation of the object
-	 *		 that was passed to the constructor
+	 *         that was passed to the constructor
 	 * @langversion ActionScript 3.0
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function getString():String
-	{
+	public function getString():String {
 		return jsonString;
 	}
 
@@ -74,34 +68,23 @@ public class JSONEncoder {
 	 * Converts a value to it's JSON string equivalent.
 	 *
 	 * @param value The value to convert.  Could be any
-	 *		type (object, number, array, etc)
+	 *        type (object, number, array, etc)
 	 */
-	private function convertToString(value:*):String
-	{
-
+	private function convertToString(value:*):String {
 		// determine what value is and convert it based on it's type
 		if (value is String) {
-
 			// escape the string so it's formatted correctly
 			return escapeString(value as String);
-
 		} else if (value is Number) {
-
 			// only encode numbers that finate
 			return isFinite(value as Number) ? value.toString() : "null";
-
 		} else if (value is Boolean) {
-
 			// convert boolean to string easily
 			return value ? "true" : "false";
-
 		} else if (value is Array) {
-
 			// call the helper method to convert an array
 			return arrayToString(value as Array);
-
 		} else if (value is Object && value != null) {
-
 			// call the helper method to convert an object
 			return objectToString(value);
 		}
@@ -113,10 +96,9 @@ public class JSONEncoder {
 	 *
 	 * @param str The string to be escaped
 	 * @return The string with escaped special characters
-	 *		 according to the JSON specification
+	 *         according to the JSON specification
 	 */
-	private function escapeString(str:String):String
-	{
+	private function escapeString(str:String):String {
 		// create a string to store the string's jsonstring value
 		var s:String = "";
 		// current character in the string we're processing
@@ -126,45 +108,43 @@ public class JSONEncoder {
 
 		// loop over all of the characters in the string
 		for (var i:int = 0; i < len; i++) {
-
 			// examine the character to determine if we have to escape it
 			ch = str.charAt(i);
 			switch (ch) {
-
-				case '"':	// quotation mark
+				case '"':
+					// quotation mark
 					s += "\\\"";
 					break;
+				// case '/':	// solidus
+				// s += "\\/";
+				// break;
 
-				//case '/':	// solidus
-				//	s += "\\/";
-				//	break;
-
-				case '\\':	// reverse solidus
+				case '\\':
+					// reverse solidus
 					s += "\\\\";
 					break;
-
-				case '\b':	// bell
+				case '\b':
+					// bell
 					s += "\\b";
 					break;
-
-				case '\f':	// form feed
+				case '\f':
+					// form feed
 					s += "\\f";
 					break;
-
-				case '\n':	// newline
+				case '\n':
+					// newline
 					s += "\\n";
 					break;
-
-				case '\r':	// carriage return
+				case '\r':
+					// carriage return
 					s += "\\r";
 					break;
-
-				case '\t':	// horizontal tab
+				case '\t':
+					// horizontal tab
 					s += "\\t";
 					break;
-
-				default:	// everything else
-
+				default:
+					// everything else
 					// check for a control character and escape as unicode
 					if (ch < ' ') {
 						// get the hex digit(s) of the character (either 1 or 2 digits)
@@ -177,14 +157,13 @@ public class JSONEncoder {
 						// create the unicode escape sequence with 4 hex digits
 						s += "\\u" + zeroPad + hexCode;
 					} else {
-
 						// no need to do any special encoding, just pass-through
 						s += ch;
-
 					}
-			}	// end switch
-
-		}	// end for loop
+			}
+			// end switch
+		}
+		// end for loop
 
 		return "\"" + s + "\"";
 	}
@@ -195,8 +174,7 @@ public class JSONEncoder {
 	 * @param a The array to convert
 	 * @return The JSON string representation of <code>a</code>
 	 */
-	private function arrayToString(a:Array):String
-	{
+	private function arrayToString(a:Array):String {
 		// create a string to store the array's jsonstring value
 		var s:String = "";
 
@@ -216,7 +194,7 @@ public class JSONEncoder {
 
 		// KNOWN ISSUE:  In ActionScript, Arrays can also be associative
 		// objects and you can put anything in them, ie:
-		//		myArray["foo"] = "bar";
+		// myArray["foo"] = "bar";
 		//
 		// These properties aren't picked up in the for loop above because
 		// the properties don't correspond to indexes.  However, we're
@@ -240,8 +218,7 @@ public class JSONEncoder {
 	 * @param o The object to convert
 	 * @return The JSON string representation of <code>o</code>
 	 */
-	private function objectToString(o:Object):String
-	{
+	private function objectToString(o:Object):String {
 		// create a string to store the object's jsonstring value
 		var s:String = "";
 
@@ -274,8 +251,7 @@ public class JSONEncoder {
 
 				s += escapeString(key) + ":" + convertToString(value);
 			}
-		}
-		else // o is a class instance
+		} else // o is a class instance
 		{
 			// Loop over all of the variables and accessors in the class and
 			// serialize them along with their values.
@@ -287,16 +263,11 @@ public class JSONEncoder {
 					s += ","
 				}
 
-				s += escapeString(v.@name.toString()) + ":"
-						+ convertToString(o[ v.@name ]);
+				s += escapeString(v.@name.toString()) + ":" + convertToString(o[ v.@name ]);
 			}
-
 		}
 
 		return "{" + s + "}";
 	}
-
-
 }
-
 }

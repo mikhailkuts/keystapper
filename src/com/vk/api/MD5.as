@@ -1,7 +1,6 @@
 package com.vk.api {
 public class MD5 {
-	public static function encrypt(data:String):String
-	{
+	public static function encrypt(data:String):String {
 		var x:Array;
 		var k:Number, AA:Number,
 				BB:Number, CC:Number,
@@ -101,13 +100,11 @@ public class MD5 {
 		return temp.toLowerCase();
 	}
 
-	private static function RotateLeft(lValue:int, iShiftBits:int):Number
-	{
+	private static function RotateLeft(lValue:int, iShiftBits:int):Number {
 		return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
 	}
 
-	private static function AddUnsigned(lX:int, lY:int):Number
-	{
+	private static function AddUnsigned(lX:int, lY:int):Number {
 		var lX4:int, lY4:int, lX8:int, lY8:int, lResult:int;
 		lX8 = (lX & 0x80000000);
 		lY8 = (lY & 0x80000000);
@@ -128,52 +125,43 @@ public class MD5 {
 		}
 	}
 
-	private static function F(x:int, y:int, z:int):int
-	{
+	private static function F(x:int, y:int, z:int):int {
 		return (x & y) | ((~x) & z);
 	}
 
-	private static function G(x:int, y:int, z:int):int
-	{
+	private static function G(x:int, y:int, z:int):int {
 		return (x & z) | (y & (~z));
 	}
 
-	private static function H(x:int, y:int, z:int):int
-	{
+	private static function H(x:int, y:int, z:int):int {
 		return (x ^ y ^ z);
 	}
 
-	private static function I(x:int, y:int, z:int):int
-	{
+	private static function I(x:int, y:int, z:int):int {
 		return (y ^ (x | (~z)));
 	}
 
-	private static function FF(a:int, b:int, c:int, d:int, x:int, s:int, ac:int):int
-	{
+	private static function FF(a:int, b:int, c:int, d:int, x:int, s:int, ac:int):int {
 		a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
 		return AddUnsigned(RotateLeft(a, s), b);
 	}
 
-	private static function GG(a:int, b:int, c:int, d:int, x:int, s:int, ac:int):int
-	{
+	private static function GG(a:int, b:int, c:int, d:int, x:int, s:int, ac:int):int {
 		a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
 		return AddUnsigned(RotateLeft(a, s), b);
 	}
 
-	private static function HH(a:int, b:int, c:int, d:int, x:int, s:int, ac:int):int
-	{
+	private static function HH(a:int, b:int, c:int, d:int, x:int, s:int, ac:int):int {
 		a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
 		return AddUnsigned(RotateLeft(a, s), b);
 	}
 
-	private static function II(a:int, b:int, c:int, d:int, x:int, s:int, ac:int):Number
-	{
+	private static function II(a:int, b:int, c:int, d:int, x:int, s:int, ac:int):Number {
 		a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
 		return AddUnsigned(RotateLeft(a, s), b);
 	}
 
-	private static function ConvertToWordArray(string:String):Array
-	{
+	private static function ConvertToWordArray(string:String):Array {
 		var lWordCount:Number;
 		var lMessageLength:Number = string.length;
 		var lNumberOfWords_temp1:Number = lMessageLength + 8;
@@ -196,8 +184,7 @@ public class MD5 {
 		return lWordArray;
 	}
 
-	private static function WordToHex(lValue:Number):String
-	{
+	private static function WordToHex(lValue:Number):String {
 		var WordToHexValue:String = "", WordToHexValue_temp:String = "", lByte:Number, lCount:Number;
 		for (lCount = 0; lCount <= 3; lCount++) {
 			lByte = (lValue >>> (lCount * 8)) & 255;
@@ -207,28 +194,22 @@ public class MD5 {
 		return WordToHexValue;
 	}
 
-	private static function Utf8Encode(string:String):String
-	{
-
+	private static function Utf8Encode(string:String):String {
 		var utftext:String = "";
 
 		for (var n:Number = 0; n < string.length; n++) {
-
 			var c:Number = string.charCodeAt(n);
 
 			if (c < 128) {
 				utftext += String.fromCharCode(c);
-			}
-			else if ((c > 127) && (c < 2048)) {
+			} else if ((c > 127) && (c < 2048)) {
 				utftext += String.fromCharCode((c >> 6) | 192);
 				utftext += String.fromCharCode((c & 63) | 128);
-			}
-			else {
+			} else {
 				utftext += String.fromCharCode((c >> 12) | 224);
 				utftext += String.fromCharCode(((c >> 6) & 63) | 128);
 				utftext += String.fromCharCode((c & 63) | 128);
 			}
-
 		}
 
 		return utftext;

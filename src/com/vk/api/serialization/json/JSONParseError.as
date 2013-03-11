@@ -32,18 +32,14 @@
  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOURCE CODE, EVEN IF
  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package com.vk.api.serialization.json {
-
 /**
  *
  *
  */
 public class JSONParseError extends Error {
-
 	/** The location in the string where the error occurred */
 	private var _location:int;
-
 	/** The string in which the parse error occurred */
 	private var _text:String;
 
@@ -55,10 +51,9 @@ public class JSONParseError extends Error {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function JSONParseError(message:String = "", location:int = 0, text:String = "")
-	{
+	public function JSONParseError(message:String = "", location:int = 0, text:String = "") {
 		super(message);
-		//name = "JSONParseError";
+		// name = "JSONParseError";
 		_location = location;
 		_text = text;
 	}
@@ -71,8 +66,7 @@ public class JSONParseError extends Error {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function get location():int
-	{
+	public function get location():int {
 		return _location;
 	}
 
@@ -84,10 +78,8 @@ public class JSONParseError extends Error {
 	 * @playerversion Flash 9.0
 	 * @tiptext
 	 */
-	public function get text():String
-	{
+	public function get text():String {
 		return _text;
 	}
 }
-
 }

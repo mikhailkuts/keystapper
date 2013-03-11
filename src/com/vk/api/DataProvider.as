@@ -1,5 +1,4 @@
 package com.vk.api {
-
 import com.vk.api.serialization.json.JSON;
 
 import flash.events.*;
@@ -12,12 +11,9 @@ public class DataProvider {
 	private var _api_secret:String;
 	private var _viewer_id:Number;
 	private var _request_params:Array;
-
 	private var _global_options:Object;
 
-
-	public function DataProvider(api_url:String, api_id:Number, api_sid:String, api_secret:String, viewer_id:Number)
-	{
+	public function DataProvider(api_url:String, api_id:Number, api_sid:String, api_secret:String, viewer_id:Number) {
 		_api_secret = api_secret;
 		_api_sid = api_sid;
 		_api_url = api_url;
@@ -25,13 +21,11 @@ public class DataProvider {
 		_viewer_id = viewer_id;
 	}
 
-	public function setup(options:Object):void
-	{
+	public function setup(options:Object):void {
 		_global_options = options;
 	}
 
-	public function request(method:String, options:Object = null):void
-	{
+	public function request(method:String, options:Object = null):void {
 		var onComplete:Function, onError:Function;
 		if (options == null) {
 			options = new Object();
@@ -41,13 +35,10 @@ public class DataProvider {
 		_sendRequest(method, options);
 	}
 
-
 	/********************
 	 * Private methods
 	 ********************/
-
-	private function _sendRequest(method:String, options:Object):void
-	{
+	private function _sendRequest(method:String, options:Object):void {
 		var self:Object = this;
 
 		var request_params:Object = {method:method};
@@ -74,18 +65,15 @@ public class DataProvider {
 		var loader:URLLoader = new URLLoader();
 		loader.dataFormat = URLLoaderDataFormat.TEXT;
 		if (options.onError) {
-			loader.addEventListener(IOErrorEvent.IO_ERROR, function ():void
-			{
+			loader.addEventListener(IOErrorEvent.IO_ERROR, function ():void {
 				options.onError("Connection error occured");
 			});
-			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, function ():void
-			{
+			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, function ():void {
 				options.onError("Security error occured");
 			});
 		}
 
-		loader.addEventListener(Event.COMPLETE, function (e:Event):void
-		{
+		loader.addEventListener(Event.COMPLETE, function (e:Event):void {
 			var loader:URLLoader = URLLoader(e.target);
 			log(loader.data);
 			var data:Object = JSON.decode(loader.data);
@@ -97,8 +85,7 @@ public class DataProvider {
 		});
 		try {
 			loader.load(request);
-		}
-		catch (error:Error) {
+		} catch (error:Error) {
 			options.onError(error);
 		}
 	}
@@ -107,8 +94,7 @@ public class DataProvider {
 	 * Generates signature
 	 *
 	 */
-	private function _generate_signature(request_params:Object):String
-	{
+	private function _generate_signature(request_params:Object):String {
 		var signature:String = "";
 		var sorted_array:Array = new Array();
 		for (var key:String in request_params) {
@@ -117,7 +103,7 @@ public class DataProvider {
 		sorted_array.sort();
 
 		// Note: make sure that the signature parameter is not already included in
-		//       request_params array.
+		// request_params array.
 		for (key in sorted_array) {
 			signature += sorted_array[key];
 		}
