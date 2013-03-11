@@ -16,7 +16,7 @@ public class App extends MovieClip {
 
 	public function App():void
 	{
-		log("app created");
+		log("App created");
 		new GameContext(this);
 	}
 }
