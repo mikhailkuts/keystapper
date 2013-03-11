@@ -5,14 +5,16 @@
  * Time: 1:31
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.view.game {
+package com.hp.view {
+import assets.GameView;
+import assets.PreloaderView;
 import assets.WelcomeView;
 
 import com.hp.model.LevelsModel;
-import com.hp.view.game.components.GameView;
 import com.hp.view.leaderboard.components.LeaderboardView;
 import com.hp.view.level.components.LevelView;
 
+import flash.display.Sprite;
 import flash.events.Event;
 
 import org.robotlegs.mvcs.Mediator;
@@ -22,16 +24,20 @@ public class GameMediator extends Mediator {
 	public static const ACTIVE_LEVEL:String = "ActiveLevel";
 	public static const ACTIVE_PRELOADER:String = "ActivePreloader";
 	public static const ACTIVE_WELCOME:String = "ActiveWelcome";
+
 	[Inject]
 	public var view:GameView;
 	[Inject]
 	public var leaderboardView:LeaderboardView;
+	[Inject]
+	public var preloaderView:PreloaderView;
 	[Inject]
 	public var levelView:LevelView;
 	[Inject]
 	public var welcomeView:WelcomeView;
 	[Inject]
 	public var levelsModel:LevelsModel;
+	private var _activeView:Sprite;
 
 	override public function onRegister():void {
 		log("GameMediator registered");
@@ -44,24 +50,31 @@ public class GameMediator extends Mediator {
 
 
 		//eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
-
-		view.init();
 	}
 
 	private function handleActivePreloader(event:Event):void {
-
+		log("handleActivePreloader");
+		this.activeView = preloaderView;
 	}
 
 	private function handleActiveLeaderboard(event:Event):void {
-		view.activeView = leaderboardView;
+		this.activeView = leaderboardView;
 	}
 
 	private function handleActiveLevel(event:Event):void {
-		view.activeView = levelView;
+		this.activeView = levelView;
 	}
 
 	private function handleActiveWelcome(event:Event):void {
-		view.activeView = welcomeView;
+		log("handleActiveWelcome");
+		this.activeView = welcomeView;
+	}
+	public function set activeView(aview:Sprite):void {
+		if (_activeView)
+			view.removeChild(_activeView);
+
+		_activeView = aview;
+		view.addChild(_activeView);
 	}
 }
 }

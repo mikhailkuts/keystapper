@@ -9,7 +9,7 @@ package com.hp.service {
 import com.hp.model.LevelsModel;
 import com.hp.model.vo.LevelVO;
 import com.hp.model.vo.NoteVO;
-import com.hp.view.game.GameMediator;
+import com.hp.view.GameMediator;
 
 import flash.events.Event;
 

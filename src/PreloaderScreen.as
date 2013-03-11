@@ -10,7 +10,6 @@ public class PreloaderScreen extends MovieClip {
 	private const MAIN_CLASS_NAME:String = "App";
 
 	public function PreloaderScreen() {
-		log("Preloader");
 		stop();
 		if (stage) {
 			handleAddToStage();

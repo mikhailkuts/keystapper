@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp {
+import assets.GameView;
+import assets.PreloaderView;
 import assets.WelcomeView;
 
 import com.hp.controller.StartupCommand;
@@ -13,16 +15,16 @@ import com.hp.events.TimeKeyboardEvent;
 import com.hp.model.LevelsModel;
 import com.hp.service.LoaderDataService;
 import com.hp.controller.KeyboardCommand;
+import com.hp.view.PreloaderMediator;
 
 import flash.events.KeyboardEvent;
 
-import com.hp.view.game.GameMediator;
-import com.hp.view.game.components.GameView;
+import com.hp.view.GameMediator;
 import com.hp.view.leaderboard.LeaderboardMediator;
 import com.hp.view.leaderboard.components.LeaderboardView;
 import com.hp.view.level.LevelMediator;
 import com.hp.view.level.components.LevelView;
-import com.hp.view.welcome.WelcomeMediator;
+import com.hp.view.WelcomeMediator;
 
 import org.robotlegs.base.ContextEvent;
 import org.assetloader.AssetLoader;
@@ -37,23 +39,6 @@ public class GameContext extends Context {
 	}
 
 	override public function startup():void {
-		mapComponents();
-		mapMediators();
-		mapEvents();
-
-		super.startup();
-	}
-
-	private function mapEvents():void {
-		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
-		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, TimeKeyboardEvent);
-	}
-
-	private function mapComponents():void {
-		// Views
-		injector.mapSingleton(GameView);
-		injector.mapSingleton(LevelView);
-		injector.mapSingleton(WelcomeView);
 
 		// Components
 		injector.mapClass(LeaderboardView, LeaderboardView);
@@ -64,13 +49,25 @@ public class GameContext extends Context {
 		// Services
 		injector.mapClass(LoaderDataService, LoaderDataService);
 		injector.mapSingletonOf(IAssetLoader, AssetLoader);
-	}
 
-	private function mapMediators():void {
+		// Commands
+		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
+		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, TimeKeyboardEvent);
+
+		//Mediators
 		mediatorMap.mapView(GameView, GameMediator);
 		mediatorMap.mapView(LeaderboardView, LeaderboardMediator);
 		mediatorMap.mapView(LevelView, LevelMediator);
 		mediatorMap.mapView(WelcomeView, WelcomeMediator);
+		mediatorMap.mapView(PreloaderView, PreloaderMediator);
+
+		// Views
+		injector.mapSingleton(GameView);
+		injector.mapSingleton(LevelView);
+		injector.mapSingleton(WelcomeView);
+
+		super.startup();
+
 	}
 }
 }

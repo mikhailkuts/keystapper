@@ -1,7 +1,8 @@
 package com.hp.controller {
+import assets.GameView;
+
 import com.hp.service.LoaderDataService;
-import com.hp.view.game.GameMediator;
-import com.hp.view.game.components.GameView;
+import com.hp.view.GameMediator;
 import com.hp.view.level.components.LevelView;
 
 import flash.display.StageAlign;
