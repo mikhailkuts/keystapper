@@ -14,7 +14,7 @@ import assets.WelcomeView;
 
 import com.hp.keystapper.controller.KeyboardCommand;
 import com.hp.keystapper.controller.StartupCommand;
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.levels.LevelsModel;
 import com.hp.keystapper.service.LoaderDataService;
 import com.hp.keystapper.view.GameMediator;
 import com.hp.keystapper.view.LeaderboardMediator;
@@ -31,11 +31,14 @@ import org.robotlegs.base.ContextEvent;
 import org.robotlegs.mvcs.Context;
 
 public class GameContext extends Context {
-	public function GameContext(contextView:DisplayObjectContainer) {
+
+	public function GameContext(contextView:DisplayObjectContainer)
+	{
 		super(contextView);
 	}
 
-	override public function startup():void {
+	override public function startup():void
+	{
 
 		// Models
 		injector.mapSingleton(LevelsModel);
@@ -56,11 +59,11 @@ public class GameContext extends Context {
 		mediatorMap.mapView(PreloaderView, PreloaderMediator);
 
 		// Views
-		injector.mapSingleton(GameView);
-		injector.mapSingleton(LevelView);
-		injector.mapSingleton(LeaderboardView);
-		injector.mapSingleton(WelcomeView);
-		injector.mapSingleton(PreloaderView);
+		injector.mapClass(GameView, GameView);
+		injector.mapClass(LevelView, LevelView);
+		injector.mapClass(LeaderboardView, LeaderboardView);
+		injector.mapClass(WelcomeView, WelcomeView);
+		injector.mapClass(PreloaderView, PreloaderView);
 
 		super.startup();
 

@@ -12,14 +12,15 @@ import assets.LevelView;
 import assets.PreloaderView;
 import assets.WelcomeView;
 
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.levels.LevelsModel;
 
 import flash.display.Sprite;
 import flash.events.Event;
 
 import org.robotlegs.mvcs.Mediator;
 
-public class GameMediator extends Mediator {
+public class GameMediator extends Mediator
+{
 	public static const ACTIVE_LEADERBOARD:String = "ActiveLeaderboard";
 	public static const ACTIVE_LEVEL:String = "ActiveLevel";
 	public static const ACTIVE_PRELOADER:String = "ActivePreloader";
@@ -39,17 +40,12 @@ public class GameMediator extends Mediator {
 	public var levelsModel:LevelsModel;
 	private var _activeView:Sprite;
 
-	override public function onRegister():void {
-		log("GameMediator registered");
-
+	override public function onRegister():void
+	{
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEADERBOARD, handleActiveLeaderboard, Event);
-
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveLevel, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_WELCOME, handleActiveWelcome, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_PRELOADER, handleActivePreloader, Event);
-		//eventMap.mapListener(eventDispatcher, LevelsModel.LEVEL_CHANGED, onLevelChanged, Event);
-
-		//eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
 	}
 
 	private function handleActivePreloader(event:Event):void
@@ -71,11 +67,12 @@ public class GameMediator extends Mediator {
 	{
 		this.activeView = welcomeView;
 	}
+
 	public function set activeView(aview:Sprite):void
 	{
-		if(_activeView == aview)
+		if (_activeView == aview)
 			return;
-		if(_activeView != null)
+		if (_activeView != null)
 			view.removeChild(_activeView);
 
 		_activeView = aview;

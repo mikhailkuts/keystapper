@@ -8,7 +8,7 @@
 package com.hp.keystapper.view {
 import assets.WelcomeView;
 
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.levels.LevelsModel;
 import com.hp.keystapper.view.GameMediator;
 
 import flash.events.Event;

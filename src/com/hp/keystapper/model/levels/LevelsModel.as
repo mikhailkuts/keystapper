@@ -5,9 +5,9 @@
  * Time: 12:07 AM
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.keystapper.model {
-import com.hp.keystapper.model.vo.LevelVO;
-import com.hp.keystapper.model.vo.NoteVO;
+package com.hp.keystapper.model.levels {
+import com.hp.keystapper.model.levels.vo.LevelVO;
+import com.hp.keystapper.model.levels.vo.NoteVO;
 
 import flash.events.Event;
 import flash.events.TimerEvent;
@@ -19,7 +19,6 @@ public class LevelsModel extends Actor {
 
 	public static const LEVELS_ASSETS:String = "LevelsAssets";
 	public static const DATA_ASSIGNED:String = "DataAssigned";
-
 	public static const LEVEL_CHANGED:String = "onLevelChanged";
 
 	private var _levels:Vector.<LevelVO>;
@@ -35,7 +34,7 @@ public class LevelsModel extends Actor {
 	{
 		_startTime = getTimer();
 	}
-	public function updateTime(event:TimerEvent = null):void
+	public function timerTick(event:TimerEvent = null):void
 	{
 		_currentTime = getTimer() - _startTime;
 	}
@@ -62,11 +61,6 @@ public class LevelsModel extends Actor {
 	{
 		_currentLevelID = value;
 		dispatch(new Event(LEVEL_CHANGED));
-	}
-
-	public function set startTime(value:int):void
-	{
-		_startTime = value;
 	}
 
 	public function get currentTime():int

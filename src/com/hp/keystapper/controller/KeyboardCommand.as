@@ -1,5 +1,5 @@
 package com.hp.keystapper.controller {
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.levels.LevelsModel;
 
 import flash.events.KeyboardEvent;
 

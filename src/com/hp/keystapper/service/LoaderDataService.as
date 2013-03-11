@@ -6,9 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.keystapper.service {
-import com.hp.keystapper.model.LevelsModel;
-import com.hp.keystapper.model.vo.LevelVO;
-import com.hp.keystapper.model.vo.NoteVO;
+import com.hp.keystapper.model.levels.LevelsModel;
+import com.hp.keystapper.model.levels.vo.LevelVO;
+import com.hp.keystapper.model.levels.vo.NoteVO;
 import com.hp.keystapper.view.GameMediator;
 
 import flash.events.Event;

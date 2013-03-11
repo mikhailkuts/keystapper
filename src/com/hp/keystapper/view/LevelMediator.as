@@ -8,10 +8,11 @@
 package com.hp.keystapper.view {
 import assets.LevelView;
 
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.levels.LevelsModel;
 
 import flash.events.KeyboardEvent;
 import flash.events.TimerEvent;
+import flash.media.SoundChannel;
 import flash.utils.Timer;
 
 import org.robotlegs.mvcs.Mediator;
@@ -39,14 +40,16 @@ public class LevelMediator extends Mediator {
 
 	private function start():void {
 		levelsModel.start();
+		//_soundChannel = levelsModel.currentLevel.track.play();
 		_timer = new Timer(100);
-		_timer.addEventListener(TimerEvent.TIMER, levelsModel.updateTime);
+		_timer.addEventListener(TimerEvent.TIMER, levelsModel.timerTick);
 		_timer.start();
 	}
 
 	private function stop():void {
+		//_soundChannel.stop();
 		_timer.stop();
-		_timer.removeEventListener(TimerEvent.TIMER, levelsModel.updateTime);
+		_timer.removeEventListener(TimerEvent.TIMER, levelsModel.timerTick);
 		_timer = null;
 	}
 }

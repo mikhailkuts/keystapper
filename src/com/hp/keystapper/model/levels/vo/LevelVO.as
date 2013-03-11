@@ -5,7 +5,7 @@
  * Time: 12:23 AM
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.keystapper.model.vo {
+package com.hp.keystapper.model.levels.vo {
 import flash.media.Sound;
 
 import org.robotlegs.mvcs.Actor;

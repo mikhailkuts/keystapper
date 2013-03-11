@@ -2,7 +2,7 @@
  * @author: Alexander Slavschik <kvinty@icloud.com>
  * created at: 10.03.13
  */
-package com.hp.keystapper.model.vo {
+package com.hp.keystapper.model.levels.vo {
 import flash.events.KeyboardEvent;
 
 public class NoteVO {
