@@ -19,8 +19,8 @@ public class LevelsModel extends Actor {
 	public static const LEVELS_ASSETS:String = "LevelsAssets";
 
 	public static const DATA_ASSIGNED:String = "DataAssigned";
-	private var _rawData:XML;
 	private var _levels:Vector.<LevelVO>;
+	private var _ready:Boolean;
 
 	public function LevelsModel() {
 		super();
@@ -28,14 +28,14 @@ public class LevelsModel extends Actor {
 
 	public function getDelaysForTime(time:int, state:int = 1):Vector.<NoteVO> {
 		/*var d:Vector.<NoteVO> = new Vector.<NoteVO>();
-		var cd:NoteVO;
-		for (var i:int = 0; i < _levels.length; i++) {
-			cd = _levels[i];
-			if (cd.getStateForTime(time) == state) {
-				d.push(cd);
-			}
-		}
-		return d;*/
+		 var cd:NoteVO;
+		 for (var i:int = 0; i < _levels.length; i++) {
+		 cd = _levels[i];
+		 if (cd.getStateForTime(time) == state) {
+		 d.push(cd);
+		 }
+		 }
+		 return d;*/
 		return null;
 	}
 
@@ -46,7 +46,12 @@ public class LevelsModel extends Actor {
 
 	public function set levels(value:Vector.<LevelVO>):void {
 		_levels = value;
+		_ready = true;
 		eventDispatcher.dispatchEvent(new Event(DATA_ASSIGNED));
+	}
+
+	public function get ready():Boolean {
+		return _ready;
 	}
 }
 

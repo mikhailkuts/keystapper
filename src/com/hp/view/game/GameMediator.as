@@ -6,11 +6,12 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.view.game {
+import assets.WelcomeView;
+
 import com.hp.model.LevelsModel;
 import com.hp.view.game.components.GameView;
 import com.hp.view.leaderboard.components.LeaderboardView;
 import com.hp.view.level.components.LevelView;
-import com.hp.view.welcome.components.WelcomeView;
 
 import flash.events.Event;
 
@@ -36,17 +37,18 @@ public class GameMediator extends Mediator {
 		log("GameMediator registered");
 
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEADERBOARD, handleActiveLeaderboard, Event);
+
 		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveLevel, Event);
 		eventMap.mapListener(eventDispatcher, ACTIVE_WELCOME, handleActiveWelcome, Event);
+		eventMap.mapListener(eventDispatcher, ACTIVE_PRELOADER, handleActivePreloader, Event);
 
-		eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
 
-		eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
+		//eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
 
 		view.init();
 	}
 
-	private function handleDataAssigned(event:Event):void {
+	private function handleActivePreloader(event:Event):void {
 
 	}
 

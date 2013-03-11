@@ -6,9 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.view.game.components {
+import assets.MainTitle;
+
 import flash.display.Sprite;
 
-public class GameView extends Sprite {
+public class GameView extends MainTitle {
 	public static const NAME:String = "Game";
 	private var _activeView:Sprite;
 

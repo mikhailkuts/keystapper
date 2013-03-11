@@ -9,6 +9,7 @@ package com.hp.service {
 import com.hp.model.LevelsModel;
 import com.hp.model.vo.LevelVO;
 import com.hp.model.vo.NoteVO;
+import com.hp.view.game.GameMediator;
 
 import flash.events.Event;
 
@@ -68,19 +69,20 @@ public class LoaderDataService extends Actor {
 					notes.sort(sortDelaysFunction);
 					levelVO.notes = notes;
 				}
-				// TODO: remove dump if-else
-				log(levelVO.notes.length, levelVO.track)
-				if(levelVO.notes && levelVO.track){
-					//all is good
-					levels.push(levelVO);
-				}else{
-					throw new Error("levelVO invalid");
-				}
+			}
+			// TODO: remove dump if-else
+			if (levelVO.notes && levelVO.track) {
+				//all is good
+				levels.push(levelVO);
+			} else {
+				throw new Error("levelVO invalid");
 			}
 			levelsModel.levels = levels;
+			dispatch(new Event(GameMediator.ACTIVE_WELCOME));
 			levelsAssetsData[levelId] = levelVO;
 		}
 	}
+
 	private static function sortDelaysFunction(a:NoteVO, b:NoteVO):int {
 		if (a.time > b.time) return 1;
 		if (a.time < b.time) return -1;
