@@ -10,7 +10,6 @@ package com.hp {
 import com.hp.events.TimeKeyboardEvent;
 import com.hp.model.LevelsModel;
 	import com.hp.service.LoaderDataService;
-	import com.hp.model.NotesModel;
 	import com.hp.controller.KeyboardCommand;
 
 	import flash.events.KeyboardEvent;
@@ -54,7 +53,6 @@ import com.hp.model.LevelsModel;
 			injector.mapSingleton(GameView);
 			injector.mapSingleton(LevelView);
 			injector.mapSingleton(WelcomeView);
-			injector.mapSingleton(NotesModel);
 
 			// Components
 			injector.mapClass(LeaderboardView, LeaderboardView);

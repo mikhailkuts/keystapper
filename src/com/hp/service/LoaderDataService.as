@@ -10,6 +10,8 @@ import com.hp.model.LevelsModel;
 import com.hp.model.vo.LevelVO;
 import com.hp.model.vo.NoteVO;
 
+import flash.events.Event;
+
 import flash.media.Sound;
 import flash.utils.Dictionary;
 
@@ -41,12 +43,13 @@ public class LoaderDataService extends Actor {
 	}
 
 	private function onLoadingComplete(signal:LoaderSignal, data:Dictionary):void {
-		var levelsAssetsData:Dictionary = data[LevelsModel.LEVELS_ASSETS];
 
+		var levelsAssetsData:Dictionary = data[LevelsModel.LEVELS_ASSETS];
+		var levels:Vector.<LevelVO> = new <LevelVO>[];
 		for (var levelId in levelsAssetsData) {
 			var levelVO:LevelVO = new LevelVO();
 
-			for (var assetId in levelsAssetsData[levelId]) {
+			for (var assetId:* in levelsAssetsData[levelId]) {
 				var assetItem:Object = levelsAssetsData[levelId][assetId];
 
 				if (assetItem is Sound) {
@@ -56,15 +59,32 @@ public class LoaderDataService extends Actor {
 				if (assetItem is XML) {
 					var notesList:XMLList = assetItem.note;
 
-					for each (var note:XML in notesList)
-						levelVO.notes.push(new NoteVO(note));
+					var notes:Vector.<NoteVO> = new Vector.<NoteVO>();
+					var d:NoteVO;
+					for each (var delay:XML in notesList) {
+						d = new NoteVO(delay);
+						notes.push(d);
+					}
+					notes.sort(sortDelaysFunction);
+					levelVO.notes = notes;
+				}
+				// TODO: remove dump if-else
+				log(levelVO.notes.length, levelVO.track)
+				if(levelVO.notes && levelVO.track){
+					//all is good
+					levels.push(levelVO);
+				}else{
+					throw new Error("levelVO invalid");
 				}
 			}
-
+			levelsModel.levels = levels;
 			levelsAssetsData[levelId] = levelVO;
 		}
-
-		levelsModel.levelsData = levelsAssetsData;
+	}
+	private static function sortDelaysFunction(a:NoteVO, b:NoteVO):int {
+		if (a.time > b.time) return 1;
+		if (a.time < b.time) return -1;
+		return 0;
 	}
 }
 }

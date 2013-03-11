@@ -7,12 +7,13 @@
  */
 package com.hp.view.level {
 import com.hp.events.TimeKeyboardEvent;
+import com.hp.model.LevelsModel;
+
+import flash.events.Event;
 
 import flash.utils.getTimer;
 
 	import com.hp.view.level.components.LevelView;
-	import com.hp.model.NotesModel;
-
 	import org.robotlegs.mvcs.Mediator;
 
 	import flash.events.KeyboardEvent;
@@ -23,7 +24,8 @@ import flash.utils.getTimer;
 		[Inject]
 		public var view : LevelView;
 		[Inject]
-		public var _delaysManager : NotesModel;
+		public var levelsModel : LevelsModel;
+
 		private var _timer : Timer;
 		private var _startTime : int;
 
@@ -32,8 +34,16 @@ import flash.utils.getTimer;
 			_timer.addEventListener(TimerEvent.TIMER, timerHandler);
 		}
 
+		private function handleDataAssigned(event:Event):void {
+			log("LevelsMediator.handleDataAssigned");
+			for (var levelId:String in levelsModel.levels)
+				log(levelsModel.levels[levelId]);
+		}
+
 		override public function onRegister() : void {
 			super.onRegister();
+
+			eventMap.mapListener(eventDispatcher, LevelsModel.DATA_ASSIGNED, handleDataAssigned, Event);
 
 			view.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			view.init();
@@ -48,7 +58,7 @@ import flash.utils.getTimer;
 				<d t="8726" k="G" />
 				<d t="6783" k="L" />
 			</data>;
-			_delaysManager.parse(data);
+			//levelsModel.parse(data);
 			start();
 		}
 

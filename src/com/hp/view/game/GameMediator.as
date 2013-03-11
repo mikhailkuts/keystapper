@@ -47,8 +47,7 @@ public class GameMediator extends Mediator {
 	}
 
 	private function handleDataAssigned(event:Event):void {
-		for (var levelId:String in levelsModel.levelsData)
-			log(levelsModel.levelsData[levelId]);
+
 	}
 
 	private function handleActiveLeaderboard(event:Event):void {
