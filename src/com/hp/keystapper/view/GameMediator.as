@@ -19,8 +19,7 @@ import flash.events.Event;
 
 import org.robotlegs.mvcs.Mediator;
 
-public class GameMediator extends Mediator
-{
+public class GameMediator extends Mediator {
 	public static const ACTIVE_LEADERBOARD:String = "ActiveLeaderboard";
 	public static const ACTIVE_LEVEL:String = "ActiveLevel";
 	public static const ACTIVE_PRELOADER:String = "ActivePreloader";
@@ -40,36 +39,34 @@ public class GameMediator extends Mediator
 	public var levelsModel:LevelsModel;
 	private var _activeView:Sprite;
 
-	override public function onRegister():void
-	{
-		eventMap.mapListener(eventDispatcher, ACTIVE_LEADERBOARD, handleActiveLeaderboard, Event);
-		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveLevel, Event);
-		eventMap.mapListener(eventDispatcher, ACTIVE_WELCOME, handleActiveWelcome, Event);
-		eventMap.mapListener(eventDispatcher, ACTIVE_PRELOADER, handleActivePreloader, Event);
+	override public function onRegister():void {
+		eventMap.mapListener(eventDispatcher, ACTIVE_LEADERBOARD, handleActiveView, Event);
+		eventMap.mapListener(eventDispatcher, ACTIVE_LEVEL, handleActiveView, Event);
+		eventMap.mapListener(eventDispatcher, ACTIVE_WELCOME, handleActiveView, Event);
+		eventMap.mapListener(eventDispatcher, ACTIVE_PRELOADER, handleActiveView, Event);
 	}
 
-	private function handleActivePreloader(event:Event):void
-	{
-		this.activeView = preloaderView;
+	private function handleActiveView(event:Event):void {
+		switch (event.type) {
+			case ACTIVE_PRELOADER :
+				this.activeView = preloaderView;
+				break;
+			case ACTIVE_WELCOME :
+				this.activeView = welcomeView;
+				break;
+			case ACTIVE_LEVEL :
+				this.activeView = levelView;
+				break;
+			case ACTIVE_LEADERBOARD :
+				this.activeView = leaderboardView;
+				break;
+			default :
+				break;
+		}
+
 	}
 
-	private function handleActiveLeaderboard(event:Event):void
-	{
-		this.activeView = leaderboardView;
-	}
-
-	private function handleActiveLevel(event:Event):void
-	{
-		this.activeView = levelView;
-	}
-
-	private function handleActiveWelcome(event:Event):void
-	{
-		this.activeView = welcomeView;
-	}
-
-	public function set activeView(aview:Sprite):void
-	{
+	public function set activeView(aview:Sprite):void {
 		if (_activeView == aview)
 			return;
 		if (_activeView != null)
