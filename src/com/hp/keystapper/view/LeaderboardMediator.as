@@ -14,9 +14,6 @@ public class LeaderboardMediator extends Mediator {
 	[Inject]
 	public var view:LeaderboardView;
 
-	public function LeaderboardMediator() {
-	}
-
 	override public function onRegister():void {
 		log("LeaderboardMediator registered");
 

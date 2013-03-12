@@ -8,16 +8,18 @@
 package com.hp.keystapper.view {
 import assets.WelcomeView;
 
-import com.hp.keystapper.model.levels.LevelsModel;
-import com.hp.keystapper.view.GameMediator;
+import com.hp.keystapper.events.ObjectEvent;
 
-import flash.events.Event;
+import com.hp.keystapper.model.levels.LevelsModel;
 
 import flash.events.MouseEvent;
 
 import org.robotlegs.mvcs.Mediator;
 
 public class WelcomeMediator extends Mediator {
+
+	public static const LEVEL_SELECT:String = "onLevelSelected";
+
 	[Inject]
 	public var view:WelcomeView;
 	[Inject]
@@ -33,20 +35,21 @@ public class WelcomeMediator extends Mediator {
 	}
 
 	private function clickHandler(event:MouseEvent):void {
+		var dynamicEvent:ObjectEvent = new ObjectEvent(LEVEL_SELECT, {});
 		switch (event.currentTarget) {
 			case view.btn1 :
-				levelsModel.currentLevelID = 0;
+				dynamicEvent.data.level = 0;
 				break;
 			case view.btn2 :
-				levelsModel.currentLevelID = 1;
+				dynamicEvent.data.level = 1;
 				break;
 			case view.btn3 :
-				levelsModel.currentLevelID = 2;
+				dynamicEvent.data.level = 2;
 				break;
 			default :
 				break;
 		}
-		dispatch(new Event(GameMediator.ACTIVE_LEVEL));
+		dispatch(dynamicEvent);
 	}
 
 
