@@ -5,19 +5,23 @@
  * Time: 1:31
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.keystapper.view {
-import assets.LevelView;
+package com.hp.keystapper.view.level {
+import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.view.level.components.LevelView;
 
-import com.hp.keystapper.model.levels.LevelsModel;
+import flash.events.Event;
 
 import flash.events.KeyboardEvent;
+import flash.events.MouseEvent;
 import flash.events.TimerEvent;
-import flash.media.SoundChannel;
 import flash.utils.Timer;
 
 import org.robotlegs.mvcs.Mediator;
 
 public class LevelMediator extends Mediator {
+
+	public static const GAME_STOP:String = "GameStop";
+
 	[Inject]
 	public var view:LevelView;
 	[Inject]
@@ -26,15 +30,18 @@ public class LevelMediator extends Mediator {
 	private var _timer:Timer;
 
 	override public function onRegister():void {
-		super.onRegister();
+		view.init();
+		//view.stage.addEventListener(KeyboardEvent.KEY_DOWN, dispatch);
+		view.BackButton.addEventListener(MouseEvent.CLICK, handleBackClick);
 
-		view.stage.addEventListener(KeyboardEvent.KEY_DOWN, dispatch);
 		start();
+		super.onRegister();
 	}
 
 	override public function onRemove():void {
 		stop();
-		view.stage.removeEventListener(KeyboardEvent.KEY_DOWN, dispatch);
+		view.BackButton.removeEventListener(MouseEvent.CLICK, handleBackClick);
+		//view.stage.removeEventListener(KeyboardEvent.KEY_DOWN, dispatch); //TODO: stage = null при удалении view
 		super.onRemove();
 	}
 
@@ -51,6 +58,11 @@ public class LevelMediator extends Mediator {
 		_timer.stop();
 		_timer.removeEventListener(TimerEvent.TIMER, levelsModel.timerTick);
 		_timer = null;
+	}
+
+	private function handleBackClick(event:MouseEvent):void
+	{
+		dispatch(new Event(GAME_STOP));
 	}
 }
 }

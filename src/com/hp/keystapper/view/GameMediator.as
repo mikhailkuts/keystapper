@@ -8,11 +8,11 @@
 package com.hp.keystapper.view {
 import assets.GameView;
 import assets.LeaderboardView;
-import assets.LevelView;
 import assets.PreloaderView;
 import assets.WelcomeView;
 
-import com.hp.keystapper.model.levels.LevelsModel;
+import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.view.level.components.LevelView;
 
 import flash.display.Sprite;
 import flash.events.Event;

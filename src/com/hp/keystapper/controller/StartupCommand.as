@@ -14,8 +14,6 @@ import org.robotlegs.mvcs.Command;
 
 public class StartupCommand extends Command {
 	[Inject]
-	public var levelsView:LevelView;
-	[Inject]
 	public var gameView:GameView;
 	[Inject]
 	public var loaderDataService:LoaderDataService;
@@ -24,9 +22,16 @@ public class StartupCommand extends Command {
 		contextView.stage.scaleMode = StageScaleMode.NO_SCALE;
 		contextView.stage.align = StageAlign.TOP_LEFT;
 		contextView.addChild(gameView);
-		loaderDataService.load();
+
+		loaderDataService.eventDispatcher.addEventListener(LoaderDataService.ON_DATA_LOADED, handleDataLoaded);
+		loaderDataService.load("assets.xml");
 
 		dispatch(new Event(GameMediator.ACTIVE_PRELOADER));
+	}
+
+	private function handleDataLoaded(event:Event):void
+	{
+		dispatch(new Event(GameMediator.ACTIVE_WELCOME));
 	}
 
 }

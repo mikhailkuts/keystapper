@@ -8,22 +8,29 @@
 package com.hp.keystapper {
 import assets.GameView;
 import assets.LeaderboardView;
-import assets.LevelView;
 import assets.PreloaderView;
 import assets.WelcomeView;
 
 import com.hp.keystapper.controller.KeyboardCommand;
 import com.hp.keystapper.controller.LevelSelectCommand;
+import com.hp.keystapper.controller.StartGameCommand;
 import com.hp.keystapper.controller.StartupCommand;
+import com.hp.keystapper.controller.StopGameCommand;
 import com.hp.keystapper.events.ObjectEvent;
-import com.hp.keystapper.model.levels.LevelsModel;
+import com.hp.keystapper.model.SoundModel;
+import com.hp.keystapper.model.LevelsModel;
 import com.hp.keystapper.service.LoaderDataService;
 import com.hp.keystapper.view.GameMediator;
 import com.hp.keystapper.view.LeaderboardMediator;
+import com.hp.keystapper.view.keyboards.IKeyboardView;
+import com.hp.keystapper.view.keyboards.KeyboardMediator;
+import com.hp.keystapper.view.level.LevelMediator;
 import com.hp.keystapper.view.PreloaderMediator;
 import com.hp.keystapper.view.WelcomeMediator;
+import com.hp.keystapper.view.level.components.LevelView;
 
 import flash.display.DisplayObjectContainer;
+import flash.events.Event;
 import flash.events.KeyboardEvent;
 
 import org.assetloader.AssetLoader;
@@ -43,6 +50,7 @@ public class GameContext extends Context {
 
 		// Models
 		injector.mapSingleton(LevelsModel);
+		injector.mapSingleton(SoundModel);
 
 		// Services
 		injector.mapClass(LoaderDataService, LoaderDataService);
@@ -50,6 +58,8 @@ public class GameContext extends Context {
 
 		// Commands
 		commandMap.mapEvent(WelcomeMediator.LEVEL_SELECT, LevelSelectCommand, ObjectEvent);
+		commandMap.mapEvent(GameMediator.ACTIVE_LEVEL, StartGameCommand, Event);
+		commandMap.mapEvent(LevelMediator.GAME_STOP, StopGameCommand, Event);
 		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
 		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, KeyboardEvent);
 
@@ -58,6 +68,8 @@ public class GameContext extends Context {
 		mediatorMap.mapView(LeaderboardView, LeaderboardMediator);
 		mediatorMap.mapView(WelcomeView, WelcomeMediator);
 		mediatorMap.mapView(PreloaderView, PreloaderMediator);
+		mediatorMap.mapView(LevelView, LevelMediator);
+		//mediatorMap.mapView(IKeyboardView, KeyboardMediator);
 
 		// Views
 		injector.mapClass(GameView, GameView);

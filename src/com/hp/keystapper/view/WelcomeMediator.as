@@ -10,7 +10,7 @@ import assets.WelcomeView;
 
 import com.hp.keystapper.events.ObjectEvent;
 
-import com.hp.keystapper.model.levels.LevelsModel;
+import com.hp.keystapper.model.LevelsModel;
 
 import flash.events.MouseEvent;
 

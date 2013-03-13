@@ -6,9 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.keystapper.service {
-import com.hp.keystapper.model.levels.LevelsModel;
-import com.hp.keystapper.model.levels.vo.LevelVO;
-import com.hp.keystapper.model.levels.vo.NoteVO;
+import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.vo.LevelVO;
+import com.hp.keystapper.model.vo.NoteVO;
 import com.hp.keystapper.view.GameMediator;
 
 import flash.events.Event;
@@ -21,6 +21,9 @@ import org.assetloader.signals.LoaderSignal;
 import org.robotlegs.mvcs.Actor;
 
 public class LoaderDataService extends Actor {
+
+	public static const ON_DATA_LOADED:String = "OnDataLoaded";
+
 	[Inject]
 	public var assetLoader:IAssetLoader;
 	[Inject]
@@ -29,10 +32,9 @@ public class LoaderDataService extends Actor {
 	public function LoaderDataService():void {
 	}
 
-	public function load():void {
-		assetLoader = new AssetLoader();
-		assetLoader.addConfig("assets.xml");
-		// TODO: assets path should be constant
+	public function load(configPath:String):void
+	{
+		assetLoader.addConfig(configPath);
 		assetLoader.onConfigLoaded.add(onConfigLoaded);
 	}
 
@@ -42,44 +44,46 @@ public class LoaderDataService extends Actor {
 		assetLoader.start();
 	}
 
-	// TODO: Миша, сделай так чтобы levels всегда были отсортированы правильно. Т.е. уровень - это порядковый номер в векторе. В дикшнари - жирно.
 	private function onLoadingComplete(signal:LoaderSignal, data:Dictionary):void {
-
-		var levelsAssetsData:Dictionary = data[LevelsModel.LEVELS_ASSETS];
 		var levels:Vector.<LevelVO> = new <LevelVO>[];
-		for (var levelId:* in levelsAssetsData) {
+
+		for (var levelId:* in data) {
 			var levelVO:LevelVO = new LevelVO();
-			for (var assetId:* in levelsAssetsData[levelId]) {
-				var assetItem:Object = levelsAssetsData[levelId][assetId];
+
+			for (var assetId:* in data[levelId]) {
+				var assetItem:Object = data[levelId][assetId];
 
 				if (assetItem is Sound) {
 					levelVO.track = assetItem as Sound;
 				}
 
 				if (assetItem is XML) {
-					var notesList:XMLList = assetItem.note;
+					levelVO.keyboard = String(assetItem.config.@keyboard);
+					levelVO.hit = int(assetItem.config.@hit);
+					levelVO.goal = int(assetItem.config.@goal);
 
-					var notes:Vector.<NoteVO> = new Vector.<NoteVO>();
-					var d:NoteVO;
+					var notesData:Vector.<NoteVO> = new Vector.<NoteVO>();
+					var notesList:XMLList = assetItem.notes.note;
+					var note:NoteVO;
 					for each (var delay:XML in notesList) {
-						d = new NoteVO(delay);
-						notes.push(d);
+						note = new NoteVO(delay);
+						notesData.push(note);
 					}
-					notes.sort(sortDelaysFunction);
-					levelVO.notes = notes;
+					notesData.sort(sortDelaysFunction);
+					levelVO.notes = notesData;
 				}
 			}
 			// TODO: remove dump if-else
 			if (levelVO.notes && levelVO.track) {
-				//all is good
-				levels.push(levelVO);
+				levels[levelId - 1] = levelVO;
 			} else {
 				throw new Error("levelVO invalid");
 			}
-			levelsModel.levels = levels;
-			dispatch(new Event(GameMediator.ACTIVE_WELCOME));
-			levelsAssetsData[levelId] = levelVO;
 		}
+
+		levelsModel.levels = levels;
+
+		eventDispatcher.dispatchEvent(new Event(ON_DATA_LOADED));
 	}
 
 	private static function sortDelaysFunction(a:NoteVO, b:NoteVO):int {

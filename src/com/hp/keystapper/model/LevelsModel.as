@@ -5,9 +5,8 @@
  * Time: 12:07 AM
  * To change this template use File | Settings | File Templates.
  */
-package com.hp.keystapper.model.levels {
-import com.hp.keystapper.model.levels.vo.LevelVO;
-import com.hp.keystapper.model.levels.vo.NoteVO;
+package com.hp.keystapper.model {
+import com.hp.keystapper.model.vo.LevelVO;
 
 import flash.events.Event;
 import flash.events.TimerEvent;
@@ -17,7 +16,6 @@ import org.robotlegs.mvcs.Actor;
 
 public class LevelsModel extends Actor {
 
-	public static const LEVELS_ASSETS:String = "LevelsAssets";
 	public static const DATA_ASSIGNED:String = "DataAssigned";
 	public static const LEVEL_CHANGED:String = "onLevelChanged";
 
