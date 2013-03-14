@@ -9,13 +9,16 @@ package com.hp.keystapper.service {
 import com.hp.keystapper.model.LevelsModel;
 import com.hp.keystapper.model.vo.LevelVO;
 import com.hp.keystapper.model.vo.NoteVO;
-import com.hp.keystapper.view.GameMediator;
 
 import flash.events.Event;
 import flash.media.Sound;
+
+import flash
+
+import flash.net.URLLoader;
+import flash.net.URLRequest;
 import flash.utils.Dictionary;
 
-import org.assetloader.AssetLoader;
 import org.assetloader.core.IAssetLoader;
 import org.assetloader.signals.LoaderSignal;
 import org.robotlegs.mvcs.Actor;
@@ -23,6 +26,9 @@ import org.robotlegs.mvcs.Actor;
 public class LoaderDataService extends Actor {
 
 	public static const ON_DATA_LOADED:String = "OnDataLoaded";
+
+	private var _configLoader:URLLoader;
+	private var _levelsParams:Dictionary;
 
 	[Inject]
 	public var assetLoader:IAssetLoader;
@@ -34,12 +40,31 @@ public class LoaderDataService extends Actor {
 
 	public function load(configPath:String):void
 	{
-		assetLoader.addConfig(configPath);
-		assetLoader.onConfigLoaded.add(onConfigLoaded);
+		_configLoader = new URLLoader();
+		_configLoader.addEventListener(Event.COMPLETE, onConfigLoaded);
+		_configLoader.load(new URLRequest(configPath));
 	}
 
-	private function onConfigLoaded(signal:LoaderSignal):void {
-		assetLoader.onConfigLoaded.remove(onConfigLoaded);
+	private function onConfigLoaded(event:Event):void
+	{
+		_configLoader.removeEventListener(Event.COMPLETE, onConfigLoaded);
+
+		var levels:XMLList = XML(event.target.data).level as XMLList;
+
+		_levelsParams = new Dictionary();
+
+		for each(var level:XML in levels)
+		{
+			var levelId:String = String(level.@id);
+
+			_levelsParams[levelId] = {
+				keyboard: String(level.@keyboard),
+				hit: int(level.@hit),
+				goal: int(level.@goal)
+			}
+		}
+
+		assetLoader.addConfig(event.target.data);
 		assetLoader.onComplete.add(onLoadingComplete);
 		assetLoader.start();
 	}
@@ -58,12 +83,8 @@ public class LoaderDataService extends Actor {
 				}
 
 				if (assetItem is XML) {
-					levelVO.keyboard = String(assetItem.config.@keyboard);
-					levelVO.hit = int(assetItem.config.@hit);
-					levelVO.goal = int(assetItem.config.@goal);
-
 					var notesData:Vector.<NoteVO> = new Vector.<NoteVO>();
-					var notesList:XMLList = assetItem.notes.note;
+					var notesList:XMLList = assetItem.note;
 					var note:NoteVO;
 					for each (var delay:XML in notesList) {
 						note = new NoteVO(delay);
@@ -73,6 +94,11 @@ public class LoaderDataService extends Actor {
 					levelVO.notes = notesData;
 				}
 			}
+
+			levelVO.goal = _levelsParams[levelId].goal;
+			levelVO.hit = _levelsParams[levelId].hit;
+			levelVO.keyboard = _levelsParams[levelId].keyboard;
+
 			// TODO: remove dump if-else
 			if (levelVO.notes && levelVO.track) {
 				levels[levelId - 1] = levelVO;

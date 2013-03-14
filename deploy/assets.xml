@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <loader connections="1" >
-	<group id="1">
-		<settings qwe="15"/>
+	<level id="1" keyboard="ipad" hit="3" goal="90">
 		<asset id="Track" src="data/track1.mp3"/>
-		<asset id="Meta" src="data/level1.xml"/>
-	</group>
-	<group id="2">
+		<asset id="Notes" src="data/notes1.xml"/>
+	</level>
+	<level id="2" keyboard="typewriter" hit="4" goal="120">
 		<asset id="Track" src="data/track2.mp3"/>
-		<asset id="Meta" src="data/level2.xml"/>
-	</group>
-	<group id="3">
+		<asset id="Notes" src="data/notes2.xml"/>
+	</level>
+	<level id="3" keyboard="pc" hit="5" goal="160">
 		<asset id="Track" src="data/track3.mp3"/>
-		<asset id="Meta" src="data/level3.xml"/>
-	</group>
+		<asset id="Notes" src="data/notes3.xml"/>
+	</level>
 </loader>

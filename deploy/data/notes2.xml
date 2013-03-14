@@ -1,0 +1,14 @@
+<?xml version= "1.0"?>
+<notes>
+	<note key="A" ms="1200"/>
+	<note key="B" ms="1300"/>
+	<note key="C" ms="1400"/>
+	<note key="D" ms="1500"/>
+	<note key="E" ms="1600"/>
+	<note key="F" ms="1700"/>
+	<note key="G" ms="1800"/>
+	<note key="H" ms="1900"/>
+	<note key="I" ms="2000"/>
+	<note key="J" ms="2100"/>
+	<note key="k" ms="2200"/>
+</notes>
