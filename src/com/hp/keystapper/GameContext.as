@@ -17,6 +17,7 @@ import com.hp.keystapper.controller.StartGameCommand;
 import com.hp.keystapper.controller.StartupCommand;
 import com.hp.keystapper.controller.StopGameCommand;
 import com.hp.keystapper.events.ObjectEvent;
+import com.hp.keystapper.model.GameModel;
 import com.hp.keystapper.model.SoundModel;
 import com.hp.keystapper.model.LevelsModel;
 import com.hp.keystapper.service.LoaderDataService;
@@ -49,6 +50,7 @@ public class GameContext extends Context {
 	{
 
 		// Models
+		injector.mapSingleton(GameModel);
 		injector.mapSingleton(LevelsModel);
 		injector.mapSingleton(SoundModel);
 
