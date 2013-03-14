@@ -13,8 +13,6 @@ import com.hp.keystapper.model.vo.NoteVO;
 import flash.events.Event;
 import flash.media.Sound;
 
-import flash
-
 import flash.net.URLLoader;
 import flash.net.URLRequest;
 import flash.utils.Dictionary;
