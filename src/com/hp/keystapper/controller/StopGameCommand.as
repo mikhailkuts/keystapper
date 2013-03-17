@@ -4,7 +4,7 @@
  */
 package com.hp.keystapper.controller {
 import com.hp.keystapper.model.SoundModel;
-import com.hp.keystapper.view.GameMediator;
+import com.hp.keystapper.view.game.GameMediator;
 
 import flash.events.Event;
 
@@ -25,7 +25,7 @@ public class StopGameCommand extends Command {
 		soundModel.channel.stop();
 		soundModel.channel = null;
 
-		dispatch(new Event(GameMediator.ACTIVE_WELCOME)) ;
+		dispatch(new Event(GameMediator.ACTIVE_WELCOME));
 
 		super.execute();
 	}

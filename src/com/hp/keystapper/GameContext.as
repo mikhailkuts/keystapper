@@ -6,33 +6,32 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.keystapper {
-import assets.GameView;
-import assets.LeaderboardView;
-import assets.PreloaderView;
-import assets.WelcomeView;
 
-import com.hp.keystapper.controller.KeyboardCommand;
-import com.hp.keystapper.controller.LevelSelectCommand;
-import com.hp.keystapper.controller.StartGameCommand;
 import com.hp.keystapper.controller.StartupCommand;
-import com.hp.keystapper.controller.StopGameCommand;
-import com.hp.keystapper.events.ObjectEvent;
-import com.hp.keystapper.model.GameModel;
-import com.hp.keystapper.model.SoundModel;
+import com.hp.keystapper.controller.screens.ScreenLeaderboardCommand;
+import com.hp.keystapper.controller.screens.ScreenLevelCommand;
+import com.hp.keystapper.controller.screens.ScreenPreloaderCommand;
+import com.hp.keystapper.controller.screens.ScreenWelcomeCommand;
 import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.SoundModel;
 import com.hp.keystapper.service.LoaderDataService;
-import com.hp.keystapper.view.GameMediator;
-import com.hp.keystapper.view.LeaderboardMediator;
-import com.hp.keystapper.view.keyboards.IKeyboardView;
-import com.hp.keystapper.view.keyboards.KeyboardMediator;
+import com.hp.keystapper.view.game.GameMediator;
+import com.hp.keystapper.view.game.components.GameView;
+import com.hp.keystapper.view.leaderboard.LeaderboardMediator;
+import com.hp.keystapper.view.leaderboard.components.LeaderboardView;
+import com.hp.keystapper.view.leaderboard.interfaces.ILeaderboardView;
 import com.hp.keystapper.view.level.LevelMediator;
-import com.hp.keystapper.view.PreloaderMediator;
-import com.hp.keystapper.view.WelcomeMediator;
 import com.hp.keystapper.view.level.components.LevelView;
+import com.hp.keystapper.view.level.interfaces.ILevelView;
+import com.hp.keystapper.view.preloader.PreloaderMediator;
+import com.hp.keystapper.view.preloader.components.PreloaderView;
+import com.hp.keystapper.view.preloader.interfaces.IPreloaderView;
+import com.hp.keystapper.view.welcome.WelcomeMediator;
+import com.hp.keystapper.view.welcome.components.WelcomeView;
+import com.hp.keystapper.view.welcome.interfaces.IWelcomeView;
 
 import flash.display.DisplayObjectContainer;
 import flash.events.Event;
-import flash.events.KeyboardEvent;
 
 import org.assetloader.AssetLoader;
 import org.assetloader.core.IAssetLoader;
@@ -48,40 +47,53 @@ public class GameContext extends Context {
 
 	override public function startup():void
 	{
+		mapModels();
+		mapServices();
+		mapCommands();
+		mapMediators();
+		mapViews();
 
-		// Models
-		injector.mapSingleton(GameModel);
+		super.startup();
+	}
+
+	private function mapModels():void
+	{
 		injector.mapSingleton(LevelsModel);
 		injector.mapSingleton(SoundModel);
+	}
 
-		// Services
+	private function mapServices():void
+	{
 		injector.mapClass(LoaderDataService, LoaderDataService);
 		injector.mapSingletonOf(IAssetLoader, AssetLoader);
+	}
 
-		// Commands
-		commandMap.mapEvent(WelcomeMediator.LEVEL_SELECT, LevelSelectCommand, ObjectEvent);
-		commandMap.mapEvent(GameMediator.ACTIVE_LEVEL, StartGameCommand, Event);
-		commandMap.mapEvent(LevelMediator.GAME_STOP, StopGameCommand, Event);
+	private function mapCommands():void
+	{
+		commandMap.mapEvent(GameMediator.ACTIVE_WELCOME, ScreenWelcomeCommand, Event);
+		commandMap.mapEvent(GameMediator.ACTIVE_LEADERBOARD, ScreenLeaderboardCommand, Event);
+		commandMap.mapEvent(GameMediator.ACTIVE_PRELOADER, ScreenPreloaderCommand, Event);
+		commandMap.mapEvent(GameMediator.ACTIVE_LEVEL, ScreenLevelCommand, Event);
+
 		commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent, true);
-		commandMap.mapEvent(KeyboardEvent.KEY_DOWN, KeyboardCommand, KeyboardEvent);
+	}
 
-		//Mediators
+	private function mapMediators():void
+	{
 		mediatorMap.mapView(GameView, GameMediator);
 		mediatorMap.mapView(LeaderboardView, LeaderboardMediator);
 		mediatorMap.mapView(WelcomeView, WelcomeMediator);
-		mediatorMap.mapView(PreloaderView, PreloaderMediator);
 		mediatorMap.mapView(LevelView, LevelMediator);
-		//mediatorMap.mapView(IKeyboardView, KeyboardMediator);
+		mediatorMap.mapView(PreloaderView, PreloaderMediator);
+	}
 
-		// Views
-		injector.mapClass(GameView, GameView);
-		injector.mapClass(LevelView, LevelView);
-		injector.mapClass(LeaderboardView, LeaderboardView);
-		injector.mapClass(WelcomeView, WelcomeView);
-		injector.mapClass(PreloaderView, PreloaderView);
-
-		super.startup();
-
+	private function mapViews():void
+	{
+		injector.mapSingleton(GameView);
+		injector.mapClass(ILeaderboardView, LeaderboardView);
+		injector.mapClass(IWelcomeView, WelcomeView);
+		injector.mapClass(ILevelView, LevelView);
+		injector.mapClass(IPreloaderView, PreloaderView);
 	}
 }
 }

@@ -12,7 +12,6 @@ import com.hp.keystapper.model.vo.NoteVO;
 
 import flash.events.Event;
 import flash.media.Sound;
-
 import flash.net.URLLoader;
 import flash.net.URLRequest;
 import flash.utils.Dictionary;
@@ -23,7 +22,7 @@ import org.robotlegs.mvcs.Actor;
 
 public class LoaderDataService extends Actor {
 
-	public static const ON_DATA_LOADED:String = "OnDataLoaded";
+	public static const ON_DATA_LOADED:String = "DataLoaded";
 
 	private var _configLoader:URLLoader;
 	private var _levelsParams:Dictionary;
@@ -33,7 +32,8 @@ public class LoaderDataService extends Actor {
 	[Inject]
 	public var levelsModel:LevelsModel;
 
-	public function LoaderDataService():void {
+	public function LoaderDataService():void
+	{
 	}
 
 	public function load(configPath:String):void
@@ -51,8 +51,7 @@ public class LoaderDataService extends Actor {
 
 		_levelsParams = new Dictionary();
 
-		for each(var level:XML in levels)
-		{
+		for each(var level:XML in levels) {
 			var levelId:String = String(level.@id);
 
 			_levelsParams[levelId] = {
@@ -67,7 +66,8 @@ public class LoaderDataService extends Actor {
 		assetLoader.start();
 	}
 
-	private function onLoadingComplete(signal:LoaderSignal, data:Dictionary):void {
+	private function onLoadingComplete(signal:LoaderSignal, data:Dictionary):void
+	{
 		var levels:Vector.<LevelVO> = new <LevelVO>[];
 
 		for (var levelId:* in data) {
@@ -110,7 +110,8 @@ public class LoaderDataService extends Actor {
 		eventDispatcher.dispatchEvent(new Event(ON_DATA_LOADED));
 	}
 
-	private static function sortDelaysFunction(a:NoteVO, b:NoteVO):int {
+	private static function sortDelaysFunction(a:NoteVO, b:NoteVO):int
+	{
 		if (a.time > b.time) return 1;
 		if (a.time < b.time) return -1;
 		return 0;

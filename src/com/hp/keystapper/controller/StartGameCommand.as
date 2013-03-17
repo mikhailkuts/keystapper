@@ -3,8 +3,8 @@
  * Date: 3/13/13
  */
 package com.hp.keystapper.controller {
-import com.hp.keystapper.model.SoundModel;
 import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.SoundModel;
 
 import org.robotlegs.mvcs.Command;
 

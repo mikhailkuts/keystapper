@@ -1,10 +1,8 @@
 package com.hp.keystapper.controller {
 
-import assets.GameView;
-import assets.LevelView;
-
 import com.hp.keystapper.service.LoaderDataService;
-import com.hp.keystapper.view.GameMediator;
+import com.hp.keystapper.view.game.GameMediator;
+import com.hp.keystapper.view.game.components.GameView;
 
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
@@ -18,7 +16,8 @@ public class StartupCommand extends Command {
 	[Inject]
 	public var loaderDataService:LoaderDataService;
 
-	override public function execute():void {
+	override public function execute():void
+	{
 		contextView.stage.scaleMode = StageScaleMode.NO_SCALE;
 		contextView.stage.align = StageAlign.TOP_LEFT;
 		contextView.addChild(gameView);
@@ -32,6 +31,7 @@ public class StartupCommand extends Command {
 	private function handleDataLoaded(event:Event):void
 	{
 		dispatch(new Event(GameMediator.ACTIVE_WELCOME));
+
 	}
 
 }

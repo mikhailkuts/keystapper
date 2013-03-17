@@ -24,7 +24,8 @@ public class LevelsModel extends Actor {
 	private var _startTime:int = 0;
 	private var _currentTime:int = 0;
 
-	public function LevelsModel() {
+	public function LevelsModel()
+	{
 		super();
 	}
 
@@ -32,16 +33,19 @@ public class LevelsModel extends Actor {
 	{
 		_startTime = getTimer();
 	}
+
 	public function timerTick(event:TimerEvent = null):void
 	{
 		_currentTime = getTimer() - _startTime;
 	}
-	
-	public function get levels():Vector.<LevelVO> {
+
+	public function get levels():Vector.<LevelVO>
+	{
 		return _levels;
 	}
 
-	public function set levels(value:Vector.<LevelVO>):void {
+	public function set levels(value:Vector.<LevelVO>):void
+	{
 		_levels = value;
 		eventDispatcher.dispatchEvent(new Event(DATA_ASSIGNED));
 	}
@@ -50,6 +54,7 @@ public class LevelsModel extends Actor {
 	{
 		return levels[_currentLevelID];
 	}
+
 	public function get currentLevelID():int
 	{
 		return _currentLevelID;

@@ -5,8 +5,7 @@
 package com.hp.keystapper.events {
 import flash.events.Event;
 
-public class ObjectEvent extends Event
-{
+public class ObjectEvent extends Event {
 	private var _data:Object;
 
 	public function ObjectEvent(type:String, data:Object, bubbles:Boolean = false, cancelable:Boolean = false)

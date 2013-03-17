@@ -21,33 +21,40 @@ public class NoteVO {
 	private var _keyCode:int;
 	private var _passed:Boolean = false;
 
-	public function NoteVO(obj:Object) {
+	public function NoteVO(obj:Object)
+	{
 		_time = int(obj.@ms);
 		_key = String(obj.@key);
 		_keyCode = _key.charCodeAt(0);
 	}
 
-	public function press(event:KeyboardEvent):void {
+	public function press(event:KeyboardEvent):void
+	{
 		_passed = _keyCode == event.keyCode;
 	}
 
-	public function get keyCode():int {
+	public function get keyCode():int
+	{
 		return _keyCode;
 	}
 
-	public function get key():String {
+	public function get key():String
+	{
 		return _key;
 	}
 
-	public function get time():int {
+	public function get time():int
+	{
 		return _time;
 	}
 
-	public function toString():String {
+	public function toString():String
+	{
 		return "[t:" + _time + " d:" + _key + "]";
 	}
 
-	public function getStateForTime(value:int):int {
+	public function getStateForTime(value:int):int
+	{
 		if (_passed) return STATE_PASSED;
 		var diff:int = _time - value;
 		if (diff < 0) return STATE_PAST;
