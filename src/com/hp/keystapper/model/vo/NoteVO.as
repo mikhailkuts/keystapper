@@ -50,7 +50,7 @@ public class NoteVO {
 
 	public function toString():String
 	{
-		return "[t:" + _time + " d:" + _key + "]";
+		return "[delay:" + _time + " key:" + _key + "]";
 	}
 
 	public function getStateForTime(value:int):int

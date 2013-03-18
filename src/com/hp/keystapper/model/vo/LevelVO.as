@@ -12,10 +12,14 @@ import flash.media.Sound;
 import org.robotlegs.mvcs.Actor;
 
 public class LevelVO extends Actor {
-	public var keyboard:String;
+	public static const KEYBOARD_IPAD:String = "ipad";
+	public static const KEYBOARD_PC:String = "pc";
+	public static const KEYBOARD_TYPEWRITTER:String = "typewriter";
+
 	public var hit:int;
 	public var goal:int;
 	public var track:Sound;
+	public var keyboardId:String;
 	public var notes:Vector.<NoteVO> = new Vector.<NoteVO>();
 
 	public function LevelVO():void

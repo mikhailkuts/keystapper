@@ -8,7 +8,7 @@
 package com.hp.keystapper.view.game {
 
 import com.hp.keystapper.events.ObjectEvent;
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.GameModel;
 import com.hp.keystapper.view.game.components.GameView;
 
 import flash.display.DisplayObject;
@@ -28,7 +28,7 @@ public class GameMediator extends Mediator {
 	public var view:GameView;
 
 	[Inject]
-	public var levelsModel:LevelsModel;
+	public var levelsModel:GameModel;
 
 	private var _activeView:DisplayObject;
 
@@ -47,6 +47,8 @@ public class GameMediator extends Mediator {
 			view.removeChild(_activeView);
 
 		_activeView = traveledView;
+
+		_activeView.y = view.Header.y + view.Header.height;
 
 		view.addChild(_activeView);
 	}

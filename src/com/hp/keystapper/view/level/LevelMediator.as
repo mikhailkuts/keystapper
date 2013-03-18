@@ -1,14 +1,9 @@
-/**
- * Created by IntelliJ IDEA.
- * User: mikhailkuts
- * Date: 06.03.13
- * Time: 1:31
- * To change this template use File | Settings | File Templates.
- */
 package com.hp.keystapper.view.level {
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.GameModel;
+import com.hp.keystapper.model.vo.LevelVO;
+import com.hp.keystapper.view.game.GameMediator;
+import com.hp.keystapper.view.keyboard.interfaces.IKeyboard;
 import com.hp.keystapper.view.level.components.LevelView;
-import com.hp.keystapper.view.level.interfaces.ILevelView;
 
 import flash.events.Event;
 import flash.utils.Timer;
@@ -17,36 +12,42 @@ import org.robotlegs.mvcs.Mediator;
 
 public class LevelMediator extends Mediator {
 
-	public static const GAME_STOP:String = "GameStop";
+	[Inject]
+	public var gameModel:GameModel;
 
 	[Inject]
-	public var view:ILevelView;
-
-	[Inject]
-	public var levelsModel:LevelsModel;
+	public var view:LevelView;
 
 	private var _timer:Timer;
+	private var _levelData:LevelVO;
 
 	override public function onRegister():void
 	{
-		view.init();
+		_levelData = gameModel.currentLevel;
 
+		view.levelData = _levelData;
+
+		log("Level info:");
+		log("Goal:" + _levelData.goal);
+		log("Hit:" + _levelData.hit);
+		log("Track:" + _levelData.track);
+		log("Keyboard:" + _levelData.keyboardId);
+		log("Notes:" + _levelData.notes);
+
+		view.addEventListener(LevelView.GO, handleStartLevel);
 		view.addEventListener(LevelView.EXIT, handleExitClick);
-		view.addEventListener(LevelView.KEY, dispatch);
 
-//		start();
+		view.init();
 
 		super.onRegister();
 	}
 
 	override public function onRemove():void
 	{
-//		stop();
-
 		view.removeEventListener(LevelView.EXIT, handleExitClick);
-		view.removeEventListener(LevelView.KEY, dispatch);
+		//view.removeEventListener(LevelView.KEY, dispatch);
+		//view.stage.removeEventListener(KeyboardEvent.KEY_DOWN, dispatch);
 
-		//view.stage.removeEventListener(KeyboardEvent.KEY_DOWN, dispatch); //TODO: stage = null при удалении view
 		super.onRemove();
 	}
 
@@ -65,9 +66,15 @@ public class LevelMediator extends Mediator {
 	 _timer = null;
 	 }
 	 */
+
+	private function handleStartLevel(event:Event):void
+	{
+		dispatch(new Event(GameModel.START_LEVEL));
+	}
+
 	private function handleExitClick(event:Event):void
 	{
-		dispatch(new Event(GAME_STOP));
+		dispatch(new Event(GameModel.STOP_LEVEL));
 	}
 }
 }

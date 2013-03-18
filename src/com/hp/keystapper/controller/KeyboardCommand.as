@@ -1,5 +1,5 @@
 package com.hp.keystapper.controller {
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.GameModel;
 
 import flash.events.KeyboardEvent;
 
@@ -13,7 +13,7 @@ public class KeyboardCommand extends Command {
 	[Inject]
 	public var event:KeyboardEvent;
 	[Inject]
-	public var levelsModel:LevelsModel;
+	public var levelsModel:GameModel;
 
 	public function KeyboardCommand()
 	{
@@ -22,7 +22,6 @@ public class KeyboardCommand extends Command {
 	override public function execute():void
 	{
 		super.execute();
-		log(event.keyCode, levelsModel.currentTime);
 	}
 }
 }

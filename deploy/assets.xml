@@ -4,11 +4,11 @@
 		<asset id="Track" src="data/track1.mp3"/>
 		<asset id="Notes" src="data/notes1.xml"/>
 	</level>
-	<level id="2" keyboard="typewriter" hit="4" goal="120">
+	<level id="2" keyboard="pc" hit="4" goal="120">
 		<asset id="Track" src="data/track2.mp3"/>
 		<asset id="Notes" src="data/notes2.xml"/>
 	</level>
-	<level id="3" keyboard="pc" hit="5" goal="160">
+	<level id="3" keyboard="typewriter" hit="5" goal="160">
 		<asset id="Track" src="data/track3.mp3"/>
 		<asset id="Notes" src="data/notes3.xml"/>
 	</level>

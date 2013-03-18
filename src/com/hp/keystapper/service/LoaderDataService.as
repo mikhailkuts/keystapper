@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.hp.keystapper.service {
-import com.hp.keystapper.model.LevelsModel;
+import com.hp.keystapper.model.GameModel;
 import com.hp.keystapper.model.vo.LevelVO;
 import com.hp.keystapper.model.vo.NoteVO;
 
@@ -30,7 +30,7 @@ public class LoaderDataService extends Actor {
 	[Inject]
 	public var assetLoader:IAssetLoader;
 	[Inject]
-	public var levelsModel:LevelsModel;
+	public var levelsModel:GameModel;
 
 	public function LoaderDataService():void
 	{
@@ -95,7 +95,7 @@ public class LoaderDataService extends Actor {
 
 			levelVO.goal = _levelsParams[levelId].goal;
 			levelVO.hit = _levelsParams[levelId].hit;
-			levelVO.keyboard = _levelsParams[levelId].keyboard;
+			levelVO.keyboardId = _levelsParams[levelId].keyboard;
 
 			// TODO: remove dump if-else
 			if (levelVO.notes && levelVO.track) {
